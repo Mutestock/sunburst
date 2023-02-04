@@ -1,4 +1,5 @@
 Feature: Making basic connections to mongodb
+
     Scenario: Get a connection to the mongodb testing database
         Given mongodb is up and running
         When a connection to the mongodb testing database is established

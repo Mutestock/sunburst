@@ -1,4 +1,5 @@
 data
+*/.vscode
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,rust,node,deno,visualstudiocode,haskell,csharp,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,rust,node,deno,visualstudiocode,haskell,csharp,java
