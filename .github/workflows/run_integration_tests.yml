@@ -17,5 +17,5 @@ jobs:
         working-directory: ./integration_tests
         run: |
           pip install -r requirements.txt
-          
+          ls
           ./test_all.sh
