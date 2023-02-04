@@ -13,6 +13,9 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10' 
+      - uses: isbang/compose-action@v1.4.1
+        with:
+          compose-file: "docker-compose.yml"
       - name: Run tests
         working-directory: ./integration_tests
         run: |
