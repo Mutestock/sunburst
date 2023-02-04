@@ -1,4 +1,5 @@
 [database]
+container_name = "sunburst-mongo-primary"
 test_db_name="test_db"
 dev_db_name="dev_db"
 prod_db_name="prod_db"
