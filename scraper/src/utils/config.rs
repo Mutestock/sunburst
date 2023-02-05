@@ -1,4 +1,4 @@
-use std::fs;
+use std::{env, fs};
 
 use serde::{Deserialize, Serialize};
 
@@ -6,7 +6,6 @@ use serde::{Deserialize, Serialize};
 pub struct Config {
     pub database: Database,
 }
-
 
 #[derive(Serialize, Deserialize)]
 pub struct Database {
@@ -18,24 +17,21 @@ pub struct Database {
     pub containerized: Containerized,
 }
 
-
 #[derive(Serialize, Deserialize)]
 pub struct Local {
     pub host: String,
     pub port: u16,
-    pub usernam: String,
+    pub username: String,
     pub password: String,
 }
-
 
 #[derive(Serialize, Deserialize)]
 pub struct Containerized {
     pub host: String,
     pub port: u16,
-    pub usernam: String,
+    pub username: String,
     pub password: String,
 }
-
 
 pub fn get_config() -> Config {
     let config_file_contents =
@@ -43,5 +39,14 @@ pub fn get_config() -> Config {
     toml::from_str(&config_file_contents).expect("Could not parse config file contents")
 }
 
+pub fn is_containerized() -> bool {
+    env::var("CONTAINERIZED").is_ok()
+}
 
+pub fn is_production() -> bool {
+    env::var("PRODUCTION").is_ok()
+}
 
+pub fn is_testing() -> bool {
+    env::var("TESTING").is_ok()
+}
