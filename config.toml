@@ -15,3 +15,7 @@ host="sunburst-mongo-primary"
 port=27017
 username="some_user"
 password="some_password"
+
+[scraper]
+# osinfo placeholder for formatting. 
+user_agent = "sunburst/0.1.0 ($osinfo)"

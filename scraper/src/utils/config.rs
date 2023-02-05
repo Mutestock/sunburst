@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize)]
 pub struct Config {
     pub database: Database,
+    pub scraper: Scraper,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -31,6 +32,11 @@ pub struct Containerized {
     pub port: u16,
     pub username: String,
     pub password: String,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct Scraper{
+    pub user_agent: String
 }
 
 pub fn get_config() -> Config {
