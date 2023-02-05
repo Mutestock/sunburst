@@ -1,3 +1,4 @@
+
 use std::env::consts;
 
 use scraper::scrape_tools::{construct_user_agent, ExtractionHelper};

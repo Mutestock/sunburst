@@ -11,7 +11,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .text()
         .await?;
     let extracted_articles = Tv2Scrape::run_sequence(content);
-    println!("{:?}", extracted_articles);
     article_insert_many(&extracted_articles).await?;
     Ok(())
 }
