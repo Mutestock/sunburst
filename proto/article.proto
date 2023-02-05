@@ -15,6 +15,7 @@ message Article {
   string language = 4;
   string scrape_date = 5;
   optional string submission_date = 6;
+  repeated string tags_and_categories = 7;
 }
 
 // ##### Request #####

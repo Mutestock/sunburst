@@ -28,7 +28,10 @@ impl ArticleProfile for Tv2Scrape {
                 println!("WARNING. \nPROFILE: tv2\nTHE FOLLOWING ARTICLE TAG WAS NOT RECOGNIZED BY THE SCRAPER: {}", article_tag_contents.to_owned());
                 continue;
             }
-            let url = &article_tag_contents.to_owned().after(" href=\"").before("\"");
+            let url = &article_tag_contents
+                .to_owned()
+                .after(" href=\"")
+                .before("\"");
 
             let mut labels = vec![];
             if article_tag_contents.to_owned().contains("</span>") {
@@ -42,7 +45,7 @@ impl ArticleProfile for Tv2Scrape {
                 &Tv2Scrape::get_scrape_date(),
                 None,
                 labels,
-            ))
+            ));
         }
         articles
     }
