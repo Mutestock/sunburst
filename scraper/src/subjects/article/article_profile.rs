@@ -1,13 +1,10 @@
 use chrono::NaiveDateTime;
 
 pub trait ArticleProfile{
-    fn run_sequence();
-    fn extract_name(&self, content: &str) -> String;
-    fn extract_site(&self, content: &str) -> String;
-    fn extract_url(&self, content: &str) -> String;
-    fn get_language(&self) -> CountryCodes;
-    fn get_scrape_date(&self) -> NaiveDateTime;
-    fn extract_submission_date(&self, content: &str) -> Option<NaiveDateTime>;
+    fn run_sequence(content: String);
+    fn get_site() -> String;
+    fn get_language() -> CountryCodes;
+    fn get_scrape_date() -> NaiveDateTime;
 }
 
 pub enum CountryCodes{
@@ -18,7 +15,7 @@ pub enum CountryCodes{
 impl ToString for CountryCodes{
     fn to_string(&self) -> String {
         match self {
-            CountryCodes::Denmark => "dkk",
+            CountryCodes::Denmark => "dk",
         }.to_owned()
     }
 }

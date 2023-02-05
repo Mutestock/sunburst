@@ -9,6 +9,7 @@ pub struct Article {
     pub language: String,
     pub scrape_date: NaiveDateTime,
     pub submission_date: Option<NaiveDateTime>,
+    pub tags_and_categories: Vec<String>,
 }
 
 impl Article {
@@ -19,6 +20,7 @@ impl Article {
         language: &str,
         scrape_date: &NaiveDateTime,
         submission_date: Option<NaiveDateTime>,
+        tags_and_categories: Vec<String>,
     ) -> Self {
         Self {
             name: name.to_owned(),
@@ -27,6 +29,7 @@ impl Article {
             language: language.to_owned(),
             scrape_date: scrape_date.clone(),
             submission_date,
+            tags_and_categories
         }
     }
 }

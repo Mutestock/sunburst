@@ -22,6 +22,7 @@ async fn test_article_insert_many() -> Result<(), mongodb::error::Error> {
             "nerglish",
             &Local::now().naive_local(),
             None,
+            vec![],
         ),
         Article::new(
             "smurf",
@@ -30,6 +31,7 @@ async fn test_article_insert_many() -> Result<(), mongodb::error::Error> {
             "nerglish",
             &Local::now().naive_local(),
             None,
+            vec!["smerk".to_owned()],
         ),
         Article::new(
             "meef",
@@ -38,6 +40,11 @@ async fn test_article_insert_many() -> Result<(), mongodb::error::Error> {
             "nerglish",
             &Local::now().naive_local(),
             None,
+            vec![
+                "gnerklish".to_owned(),
+                "nsssseeeeeeef".to_owned(),
+                "arcanite reaper".to_owned(),
+            ],
         ),
     ];
 

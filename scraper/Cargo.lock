@@ -1253,6 +1253,7 @@ name = "rs_models"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "reqwest",
  "serde",
  "serde_derive",
  "serde_json",

@@ -35,8 +35,19 @@ pub struct Containerized {
 }
 
 #[derive(Serialize, Deserialize)]
-pub struct Scraper{
-    pub user_agent: String
+pub struct Scraper {
+    pub user_agent: String,
+    pub profiles: Profiles,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct Profiles {
+    pub tv2: Tv2,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct Tv2 {
+    request_frequency_seconds: u64,
 }
 
 pub fn get_config() -> Config {
@@ -59,6 +70,6 @@ pub fn is_testing() -> bool {
     generic_testing || scraper_testing
 }
 
-pub fn set_testing_mode(){
+pub fn set_testing_mode() {
     env::set_var("TEST_MODE_SCRAPER", "1");
 }

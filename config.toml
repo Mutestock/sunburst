@@ -19,3 +19,6 @@ password="some_pass"
 [scraper]
 # osinfo placeholder for formatting. 
 user_agent = "sunburst/0.1.0 ($osinfo)"
+[scraper.profiles]
+[scraper.profiles.tv2]
+request_frequency_seconds = 108_000

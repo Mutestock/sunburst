@@ -1,4 +1,4 @@
-use std::{env::consts, str::Split};
+use std::{env::consts};
 
 use crate::utils::config::get_config;
 
@@ -26,4 +26,11 @@ impl ExtractionHelper for String {
 pub fn construct_user_agent() -> String {
     let user_agent = get_config().scraper.user_agent;
     user_agent.replace("$osinfo", consts::OS)
+}
+
+pub async fn make_request(url_to_scrape: &str) -> Result<reqwest::Response, reqwest::Error> {
+    let client = reqwest::Client::builder()
+        .user_agent(construct_user_agent())
+        .build()?;
+    client.get(url_to_scrape).send().await
 }
