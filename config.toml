@@ -8,13 +8,13 @@ prod_db_name="prod_db"
 host="localhost"
 port=20487
 username="some_user"
-password="some_password"
+password="some_pass"
 
 [database.containerized]
 host="sunburst-mongo-primary"
 port=27017
 username="some_user"
-password="some_password"
+password="some_pass"
 
 [scraper]
 # osinfo placeholder for formatting. 

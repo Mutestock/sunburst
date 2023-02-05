@@ -38,11 +38,20 @@ lazy_static::lazy_static! {
         PORT.to_string(),
         DB.to_string()
     );
+
+    static ref TEST_MODE_CONN_STRING: String = format!("mongodb://{}:{}@{}:{}/{}?authSource=admin",
+        USERNAME.to_string(),
+        PASSWORD.to_string(),
+        HOST.to_string(),
+        PORT.to_string(),
+        &CONFIG.database.test_db_name
+    );
+}
+
+pub async fn make_mongo_options() -> Result<ClientOptions, mongodb::error::Error> {
+    ClientOptions::parse(CONN_STRING.to_string()).await
 }
 
 pub async fn connect_mongo() -> Result<Client, mongodb::error::Error> {
-    println!("conn string - {}", CONN_STRING.to_string());
-    let client_options = ClientOptions::parse(CONN_STRING.to_string()).await?;
-
-    Client::with_options(client_options)
+    Client::with_options(make_mongo_options().await?)
 }

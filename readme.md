@@ -5,3 +5,5 @@ This is literally just a "look at me I'm not incompetent" project. I'd rather be
 I can use cassandra, redis, neo4j, rocksdb and any rdbms as well. Your tech isn't special.
 
 The name "sunburst" refers to the MTG mechanic "sunburst". It adds power through multiple colors. Colors are techs here
+
+Note that all passwords are placeholders. They'll be swapped and managed properly with secrets whenever deployment becomes relevant.

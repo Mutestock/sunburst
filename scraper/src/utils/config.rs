@@ -54,5 +54,11 @@ pub fn is_production() -> bool {
 }
 
 pub fn is_testing() -> bool {
-    env::var("TESTING").is_ok()
+    let generic_testing = env::var("TESTING").is_ok();
+    let scraper_testing = env::var("TEST_MODE_SCRAPER").is_ok();
+    generic_testing || scraper_testing
+}
+
+pub fn set_testing_mode(){
+    env::set_var("TEST_MODE_SCRAPER", "1");
 }
