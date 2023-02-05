@@ -31,7 +31,7 @@ lazy_static::lazy_static! {
         true => &CONFIG.database.containerized.password,
         false => &CONFIG.database.local.password,
     };
-    static ref CONN_STRING: String = format!("mongodb//{}:{}@{}:{}/{}?authSource=admin",
+    static ref CONN_STRING: String = format!("mongodb://{}:{}@{}:{}/{}?authSource=admin",
         USERNAME.to_string(),
         PASSWORD.to_string(),
         HOST.to_string(),
@@ -41,6 +41,7 @@ lazy_static::lazy_static! {
 }
 
 pub async fn connect_mongo() -> Result<Client, mongodb::error::Error> {
+    println!("conn string - {}", CONN_STRING.to_string());
     let client_options = ClientOptions::parse(CONN_STRING.to_string()).await?;
 
     Client::with_options(client_options)
