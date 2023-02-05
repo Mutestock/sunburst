@@ -47,7 +47,8 @@ pub struct Profiles {
 
 #[derive(Serialize, Deserialize)]
 pub struct Tv2 {
-    request_frequency_seconds: u64,
+    pub request_frequency_seconds: u64,
+    pub url: String,
 }
 
 pub fn get_config() -> Config {
