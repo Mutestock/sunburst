@@ -7,7 +7,7 @@ pub struct Article {
     pub site: String,
     pub url: String,
     pub language: String,
-    pub scrape_data: NaiveDateTime,
+    pub scrape_date: NaiveDateTime,
     pub submission_date: Option<NaiveDateTime>,
 }
 
@@ -17,7 +17,7 @@ impl Article {
         site: &str,
         url: &str,
         language: &str,
-        scrape_data: &NaiveDateTime,
+        scrape_date: &NaiveDateTime,
         submission_date: Option<NaiveDateTime>,
     ) -> Self {
         Self {
@@ -25,7 +25,7 @@ impl Article {
             site: site.to_owned(),
             url: url.to_owned(),
             language: language.to_owned(),
-            scrape_data: scrape_data.clone(),
+            scrape_date: scrape_date.clone(),
             submission_date,
         }
     }

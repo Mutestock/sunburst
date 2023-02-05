@@ -1,0 +1,34 @@
+syntax = "proto3";
+package article;
+
+service Article {
+  rpc ReadArticleList(ReadArticleListRequest)
+      returns (ReadArticleListResponse) {}
+  rpc ReadArticleListBySearchterm(ReadArticleListBySearchtermRequest)
+      returns (ReadArticleListBySearchtermResponse) {}
+}
+
+message Article {
+  string name = 1;
+  string site = 2;
+  string url = 3;
+  string language = 4;
+  string scrape_date = 5;
+  optional string submission_date = 6;
+}
+
+// ##### Request #####
+
+message ReadArticleListRequest {}
+message ReadArticleListBySearchtermRequest { string search_term = 1; }
+
+// ##### Response #####
+
+message ReadArticleListResponse {
+  repeated Article articles = 1;
+  string msg = 2;
+}
+message ReadArticleListBySearchtermResponse {
+  repeated Article articles = 1;
+  string msg = 2;
+}
