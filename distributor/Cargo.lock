@@ -356,6 +356,7 @@ dependencies = [
  "lazy_static",
  "mongodb",
  "prost",
+ "redis",
  "serde",
  "serde_json",
  "sunburst_connection",

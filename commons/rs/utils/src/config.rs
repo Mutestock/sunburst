@@ -74,6 +74,8 @@ pub struct DistProd {
 #[derive(Serialize, Deserialize)]
 pub struct Cache {
     pub container_name: String,
+    pub cached_common_article_search_terms: Vec<String>,
+    pub cache_common_articles_refresh_rate_seconds: u64,
     pub local: CacheLocal,
     pub containerized: CacheContainerized,
 }

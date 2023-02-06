@@ -1,7 +1,9 @@
+mod caching;
 mod handler;
 mod routes;
 mod tonic_proto_out;
 mod utils;
+
 use std::net::SocketAddr;
 
 use sunburst_utils::config::is_production;
@@ -12,6 +14,7 @@ use crate::{routes::article_routes::ArticleRouter, utils::config::CONFIG};
 
 #[tokio::main]
 async fn main() -> Result<(), tonic::transport::Error> {
+    caching::start_sequence::start_sequence().await;
     let host: &String;
     let port: &u16;
 
