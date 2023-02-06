@@ -2,12 +2,12 @@ use std::{env, fs};
 
 use serde::{Deserialize, Serialize};
 
-
 #[derive(Serialize, Deserialize)]
 pub struct Config {
     pub database: Database,
     pub scraper: Scraper,
     pub distributor: Distributor,
+    pub cache: Cache,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -53,17 +53,47 @@ pub struct Tv2 {
     pub url: String,
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct Distributor {
+    pub dev: DistDev,
+    pub prod: DistProd,
+}
 
 #[derive(Serialize, Deserialize)]
-pub struct Distributor{
+pub struct DistDev {
     pub host: String,
     pub port: u16,
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct DistProd {
+    pub host: String,
+    pub port: u16,
+}
 
-pub fn read_config(path: &str) -> Config{
-    let config_file_contents =
-        fs::read_to_string(path).expect("Failed to read config file");
+#[derive(Serialize, Deserialize)]
+pub struct Cache {
+    pub container_name: String,
+    pub local: CacheLocal,
+    pub containerized: CacheContainerized,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct CacheLocal {
+    pub host: String,
+    pub port: u16,
+    pub password: String,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct CacheContainerized {
+    pub host: String,
+    pub port: u16,
+    pub password: String,
+}
+
+pub fn read_config(path: &str) -> Config {
+    let config_file_contents = fs::read_to_string(path).expect("Failed to read config file");
     toml::from_str(&config_file_contents).expect("Could not parse config file contents")
 }
 

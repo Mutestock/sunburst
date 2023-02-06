@@ -1,3 +1,5 @@
+# All passwords here should be gone and saved in secrets instead in production.
+
 [database]
 container_name = "sunburst-mongo-primary"
 test_db_name="test_db"
@@ -16,6 +18,19 @@ port=27017
 username="some_user"
 password="some_pass"
 
+[cache]
+container_name="sunburst-redis-cache"
+
+[cache.local]
+host="localhost"
+port=20489
+password="some-redis-pass"
+
+[cache.containerized]
+host="sunburst-redis-cache"
+port=6379
+password="some-redis-pass"
+
 [scraper]
 # osinfo placeholder for formatting. 
 user_agent = "sunburst/0.1.0 ($osinfo)"
@@ -25,5 +40,10 @@ request_frequency_seconds = 108_000
 url = "https://tv2.dk/"
 
 [distributor]
+[distributor.dev]
 host = "[::]"
+port = 20488
+
+[distributor.prod]
+host = "0.0.0.0"
 port = 20488

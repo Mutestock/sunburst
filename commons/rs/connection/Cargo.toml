@@ -1,6 +1,6 @@
 [package]
 name = "sunburst_connection"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 mongodb = "2.3.1"
 sunburst_utils = {version="0.1.0", path="../utils"}
+redis = { version = "0.22.3", features = ["tokio-comp","serde", "serde_json"] }

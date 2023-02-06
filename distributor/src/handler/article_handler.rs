@@ -57,7 +57,7 @@ pub async fn handle_read_list_by_searchterm(
     let mut cursor = collection
         .find(
             doc! {
-                "name": &format!("/{}/",request.search_term)
+                "name": &format!("/{}/i",request.search_term)
             },
             None,
         )

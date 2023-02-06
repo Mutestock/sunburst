@@ -1,32 +1,39 @@
-mod utils;
-mod routes;
 mod handler;
+mod routes;
 mod tonic_proto_out;
+mod utils;
 use std::net::SocketAddr;
 
+use sunburst_utils::config::is_production;
 use tonic::transport::Server;
 
-use crate::{utils::config::CONFIG, routes::article_routes::ArticleRouter};
 use crate::tonic_proto_out::article_service_server::ArticleServiceServer;
-
-
+use crate::{routes::article_routes::ArticleRouter, utils::config::CONFIG};
 
 #[tokio::main]
 async fn main() -> Result<(), tonic::transport::Error> {
-    let addr: SocketAddr = format!("{}:{}",&CONFIG.distributor.host, &CONFIG.distributor.port)
-    .parse()
-    .unwrap();
+    let host: &String;
+    let port: &u16;
 
+    match is_production() {
+        true => {
+            host = &CONFIG.distributor.prod.host;
+            port = &CONFIG.distributor.prod.port;
+        }
+        false => {
+            host = &CONFIG.distributor.dev.host;
+            port = &CONFIG.distributor.dev.port;
+        }
+    };
 
-    println!(
-        "Server running on: {}:{}",
-        &CONFIG.distributor.host, &CONFIG.distributor.port
-    );
+    let addr: SocketAddr = format!("{}:{}", host, port).parse().unwrap();
 
-      Server::builder()
-          .add_service(ArticleServiceServer::new(ArticleRouter{}))
-          .serve(addr)
-          .await?;
+    println!("Server running on: {}:{}", host, port);
+
+    Server::builder()
+        .add_service(ArticleServiceServer::new(ArticleRouter {}))
+        .serve(addr)
+        .await?;
 
     Ok(())
 }

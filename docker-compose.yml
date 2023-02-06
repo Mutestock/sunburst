@@ -15,6 +15,17 @@ services:
     networks:
       - app-network
 
+  cache:
+    container_name: "sunburst-redis-cache"
+    image: redis:latest
+    restart: always
+    ports:
+      - 20489:6379
+    command: redis-server --requirepass some-redis-pass
+    networks:
+      - app-network
+
+
 volumes:
   data:
     driver: local
