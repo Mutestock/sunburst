@@ -4,7 +4,7 @@ This is literally just a "Look, I'm not incompetent" project. I'd rather be spen
 
 I can use cassandra, redis, neo4j, rocksdb and any rdbms as well. Your tech isn't special.
 
-Current the goal is to show experise in: Python, Rust, C#, Typescript, Javascript and maybe Haskell. I know Java as well, so that might be a thing I'll add at some point. Depends on how long I have to do this... -_-
+Current the goal is to show experise in: Python, Rust, C#, Typescript, Javascript and maybe Haskell (which I don't know, but would like to learn because I find it interesting). I know Java as well, so that might be a thing I'll add at some point. Depends on how long I have to do this... -_-
 
 The name "sunburst" refers to the MTG mechanic "sunburst". It adds power through multiple colors. Colors are techs here
 
