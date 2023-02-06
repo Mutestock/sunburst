@@ -7,6 +7,7 @@ use serde::{Deserialize, Serialize};
 pub struct Config {
     pub database: Database,
     pub scraper: Scraper,
+    pub distributor: Distributor,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -51,6 +52,14 @@ pub struct Tv2 {
     pub request_frequency_seconds: u64,
     pub url: String,
 }
+
+
+#[derive(Serialize, Deserialize)]
+pub struct Distributor{
+    pub host: String,
+    pub port: u16,
+}
+
 
 pub fn read_config(path: &str) -> Config{
     let config_file_contents =
