@@ -26,4 +26,5 @@ lazy_static = "1.4.0"
 regex = "1.7.1"
 chrono = {version="0.4.23", features=["serde"]}
 
-rs_models = { version = "0.1.1", path="../models/rs_models"}
+rs_models = { version = "0.1.1", path="../commons/rs/models"}
+sunburst_utils = {version="0.1.0", path="../commons/rs/utils"}

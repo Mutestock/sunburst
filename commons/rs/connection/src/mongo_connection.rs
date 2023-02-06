@@ -1,5 +1,4 @@
-use sunburst_utils::config::{is_containerized, is_production, is_testing, Config};
-use crate::utils::config::get_config;
+use crate::utils::config::{get_config, is_containerized, is_production, is_testing, Config};
 use lazy_static;
 use mongodb::{options::ClientOptions, Client};
 

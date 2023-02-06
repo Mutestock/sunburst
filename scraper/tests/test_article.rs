@@ -2,10 +2,10 @@ use chrono::Local;
 use mongodb::bson::doc;
 use rs_models::article::Article;
 use scraper::{
-    connection::mongo_connection::connect_mongo,
-    handlers::article_handler::article_insert_many,
-    utils::config::{get_config, set_testing_mode},
+    connection::mongo_connection::connect_mongo, handlers::article_handler::article_insert_many,
+    utils::config::get_config,
 };
+use sunburst_utils::config::set_testing_mode;
 
 #[tokio::test]
 async fn test_article_insert_many() -> Result<(), mongodb::error::Error> {

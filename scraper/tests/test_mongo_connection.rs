@@ -1,7 +1,5 @@
-use scraper::{
-    connection::mongo_connection::connect_mongo,
-    utils::config::{get_config, set_testing_mode},
-};
+use scraper::{connection::mongo_connection::connect_mongo, utils::config::get_config};
+use sunburst_utils::config::set_testing_mode;
 
 #[tokio::test]
 async fn test_mongo_connection() {
