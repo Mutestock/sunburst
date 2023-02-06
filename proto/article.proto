@@ -8,7 +8,7 @@ service Article {
       returns (ReadArticleListBySearchtermResponse) {}
 }
 
-message Article {
+message ArticleMessage {
   string name = 1;
   string site = 2;
   string url = 3;
@@ -26,10 +26,10 @@ message ReadArticleListBySearchtermRequest { string search_term = 1; }
 // ##### Response #####
 
 message ReadArticleListResponse {
-  repeated Article articles = 1;
+  repeated ArticleMessage articles = 1;
   string msg = 2;
 }
 message ReadArticleListBySearchtermResponse {
-  repeated Article articles = 1;
+  repeated ArticleMessage articles = 1;
   string msg = 2;
 }
