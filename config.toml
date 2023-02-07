@@ -39,7 +39,7 @@ password="some-redis-pass"
 user_agent = "sunburst/0.1.0 ($osinfo)"
 [scraper.profiles]
 [scraper.profiles.tv2]
-request_frequency_seconds = 108_000
+request_frequency_seconds = 1_800
 url = "https://tv2.dk/"
 
 [distributor]
