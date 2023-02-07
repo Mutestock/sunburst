@@ -116,13 +116,14 @@ pub async fn read_articles_filter(
         .await?
         .default_database()
         .unwrap()
-        .collection::<Article>("article");
+        .collection::<Article>("articles");
 
     let mut articles: Vec<Article> = Vec::new();
     let mut cursor = collection.find(filter, None).await?;
 
     while let Some(article) = cursor.next().await {
-        articles.push(article?);
+        let article = article?;
+        articles.push(article);
     }
     Ok(articles)
 }
@@ -133,7 +134,6 @@ pub async fn cache_articles(
 ) -> Result<(), redis::RedisError> {
     let mut red_conn = redis_connection::connect_redis(&REDIS_CONN_STRING).await?;
     let value = serde_json::to_string(&articles).unwrap();
-
     // This might get too big...
     let _: () = red_conn.set(cache_key, &value).await?;
 

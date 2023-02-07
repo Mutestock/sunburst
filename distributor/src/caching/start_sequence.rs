@@ -3,7 +3,7 @@ use std::time::Duration;
 use mongodb::bson::doc;
 
 use crate::caching::keys::*;
-use crate::handler::article_handler::{cache_articles, read_articles_filter};
+use crate::handler::article_handler::{cache_articles, read_articles_filter, formatted_search_term_cache_key};
 use crate::utils::config::CONFIG;
 
 pub async fn start_sequence() {
@@ -24,7 +24,7 @@ pub async fn start_sequence() {
                 .await
                 .expect("Could not read articles for the cache sequence");
 
-                cache_articles(&articles, READ_LIST_ARTICLE_CACHE_KEY)
+                cache_articles(&articles, &formatted_search_term_cache_key(search_term))
                     .await
                     .expect("Could not cache articles for cache sequence");
             }
