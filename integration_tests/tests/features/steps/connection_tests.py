@@ -1,5 +1,5 @@
 from behave import * 
-from integration_tests.utils.config import CONFIG, get_environment_specific_database_config
+from integration_tests.utils.config import CONFIG
 from integration_tests.utils.container_management import is_running
 from integration_tests.connection import mongo_connection
 
