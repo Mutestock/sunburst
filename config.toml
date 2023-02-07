@@ -21,6 +21,7 @@ password="some_pass"
 [cache]
 container_name="sunburst-redis-cache"
 cached_common_article_search_terms = ["Ukraine", "Russia", "war"]
+cached_sites = ["TV2"]
 cache_common_articles_refresh_rate_seconds = 120
 
 [cache.local]

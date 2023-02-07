@@ -1,8 +1,12 @@
 use crate::{
-    caching::keys::{READ_LIST_ARTICLE_CACHE_KEY, READ_LIST_ARTICLE_SEARCH_TERM_CACHE_KEY_PREFIX},
+    caching::keys::{
+        READ_LIST_ARTICLE_CACHE_KEY, READ_LIST_ARTICLE_SEARCH_TERM_CACHE_KEY_PREFIX,
+        READ_LIST_ARTICLE_SITE_CACHE_KEY_PREFIX,
+    },
     tonic_proto_out::{
         ArticleMessage, ReadArticleListBySearchtermRequest, ReadArticleListBySearchtermResponse,
-        ReadArticleListRequest, ReadArticleListResponse,
+        ReadArticleListBySiteRequest, ReadArticleListBySiteResponse, ReadArticleListRequest,
+        ReadArticleListResponse,
     },
 };
 use futures::stream::StreamExt;
@@ -53,6 +57,10 @@ pub fn formatted_search_term_cache_key(search_term: &str) -> String {
     )
 }
 
+pub fn formatted_site_cache_key(site: &str) -> String {
+    format!("{}{}", READ_LIST_ARTICLE_SITE_CACHE_KEY_PREFIX, site)
+}
+
 pub async fn handle_read_list_by_searchterm(
     request: ReadArticleListBySearchtermRequest,
 ) -> Result<ReadArticleListBySearchtermResponse, mongodb::error::Error> {
@@ -84,6 +92,44 @@ pub async fn handle_read_list_by_searchterm(
     };
 
     let response = ReadArticleListBySearchtermResponse {
+        articles: articles_to_article_messages(&articles).await,
+        msg: "Ok".to_owned(),
+    };
+
+    Ok(response)
+}
+
+pub async fn handle_read_article_list_by_site(
+    request: ReadArticleListBySiteRequest,
+) -> Result<ReadArticleListBySiteResponse, mongodb::error::Error> {
+    let mut red_conn = redis_connection::connect_redis(&REDIS_CONN_STRING)
+        .await
+        .expect("Could not establish redis connection");
+
+    let cache_key = formatted_site_cache_key(&request.site);
+
+    let current_cache_contents: Option<String> = red_conn
+        .get(&cache_key)
+        .await
+        .expect("Could not retrieve cache contents");
+
+    let articles = match current_cache_contents {
+        Some(v) => {
+            serde_json::from_str(&v).expect("Could not parse cache contents to article list")
+        }
+        None => {
+            let articles = read_articles_filter(Some(doc! {
+                "site": &format!("{}",request.site)
+            }))
+            .await?;
+            cache_articles(&articles, &cache_key)
+                .await
+                .expect("Could not cache articles for handle read list");
+            articles
+        }
+    };
+
+    let response = ReadArticleListBySiteResponse {
         articles: articles_to_article_messages(&articles).await,
         msg: "Ok".to_owned(),
     };

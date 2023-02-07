@@ -3,7 +3,7 @@ use std::time::Duration;
 use mongodb::bson::doc;
 
 use crate::caching::keys::*;
-use crate::handler::article_handler::{cache_articles, read_articles_filter, formatted_search_term_cache_key};
+use crate::handler::article_handler::{cache_articles, read_articles_filter, formatted_search_term_cache_key, formatted_site_cache_key};
 use crate::utils::config::CONFIG;
 
 pub async fn start_sequence() {
@@ -19,12 +19,24 @@ pub async fn start_sequence() {
 
             for search_term in CONFIG.cache.cached_common_article_search_terms.iter() {
                 let articles = read_articles_filter(Some(doc! {
-                    "name": &format!("/{}/i",search_term)
+                    "name": {"$regex": search_term }
                 }))
                 .await
                 .expect("Could not read articles for the cache sequence");
 
                 cache_articles(&articles, &formatted_search_term_cache_key(search_term))
+                    .await
+                    .expect("Could not cache articles for cache sequence");
+            }
+
+            for site in CONFIG.cache.cached_sites.iter() {
+                let articles = read_articles_filter(Some(doc! {
+                    "site": site
+                }))
+                .await
+                .expect("Could not read articles for the cache sequence");
+
+                cache_articles(&articles, &formatted_site_cache_key(site))
                     .await
                     .expect("Could not cache articles for cache sequence");
             }

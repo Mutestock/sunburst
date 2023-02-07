@@ -6,6 +6,8 @@ service ArticleService {
       returns (ReadArticleListResponse) {}
   rpc ReadArticleListBySearchterm(ReadArticleListBySearchtermRequest)
       returns (ReadArticleListBySearchtermResponse) {}
+  rpc ReadArticleListBySite(ReadArticleListBySiteRequest) returns (ReadArticleListBySiteResponse) {}
+
 }
 
 message ArticleMessage {
@@ -22,6 +24,7 @@ message ArticleMessage {
 
 message ReadArticleListRequest {}
 message ReadArticleListBySearchtermRequest { string search_term = 1; }
+message ReadArticleListBySiteRequest { string site = 1; }
 
 // ##### Response #####
 
@@ -30,6 +33,10 @@ message ReadArticleListResponse {
   string msg = 2;
 }
 message ReadArticleListBySearchtermResponse {
+  repeated ArticleMessage articles = 1;
+  string msg = 2;
+}
+message ReadArticleListBySiteResponse {
   repeated ArticleMessage articles = 1;
   string msg = 2;
 }

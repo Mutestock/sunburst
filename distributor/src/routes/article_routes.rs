@@ -4,7 +4,8 @@ use crate::handler::article_handler;
 use crate::tonic_proto_out::article_service_server::ArticleService;
 use crate::tonic_proto_out::{
     ReadArticleListBySearchtermRequest, ReadArticleListBySearchtermResponse,
-    ReadArticleListRequest, ReadArticleListResponse,
+    ReadArticleListBySiteRequest, ReadArticleListBySiteResponse, ReadArticleListRequest,
+    ReadArticleListResponse,
 };
 
 #[derive(Default)]
@@ -31,6 +32,17 @@ impl ArticleService for ArticleRouter {
             article_handler::handle_read_list_by_searchterm(request.into_inner())
                 .await
                 .expect("Failed to create read article response"),
+        ))
+    }
+
+    async fn read_article_list_by_site(
+        &self,
+        request: Request<ReadArticleListBySiteRequest>,
+    ) -> Result<Response<ReadArticleListBySiteResponse>, Status> {
+        Ok(Response::new(
+            article_handler::handle_read_article_list_by_site(request.into_inner())
+                .await
+                .expect("Failed to create read article list by site response"),
         ))
     }
 }
