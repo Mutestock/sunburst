@@ -19,7 +19,7 @@ pub async fn start_sequence() {
 
             for search_term in CONFIG.cache.cached_common_article_search_terms.iter() {
                 let articles = read_articles_filter(Some(doc! {
-                    "name": {"$regex": search_term }
+                    "name": {"$regex": search_term, "$options": "i" }
                 }))
                 .await
                 .expect("Could not read articles for the cache sequence");
