@@ -1,5 +1,5 @@
 use chrono::Local;
-use rs_models::article::Article;
+use sunburst_models::article::Article;
 
 use crate::{
     scrape_tools::ExtractionHelper,

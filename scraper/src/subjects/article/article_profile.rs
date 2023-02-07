@@ -1,5 +1,5 @@
 use chrono::NaiveDateTime;
-use rs_models::article::Article;
+use sunburst_models::article::Article;
 
 pub trait ArticleProfile{
     fn run_sequence(content: String) -> Vec<Article>;
