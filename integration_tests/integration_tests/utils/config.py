@@ -20,7 +20,6 @@ for toml_file in [CONFIG_PATH]:
         content = file_reader.read()
         if content:
             CONFIG.update(rtoml.loads(content))
-            
 
 
 if os.getenv("CONTAINERIZED"):
@@ -29,5 +28,3 @@ if os.getenv("CONTAINERIZED"):
 else:
     DB_CONF = CONFIG["database"]["local"]
     DISTRIBUTOR_CONF = CONFIG["distributor"]["dev"]
-          
-            
