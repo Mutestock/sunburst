@@ -247,7 +247,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "proto-implementations"
-version = "0.1.0"
+version = "0.1.2"
 description = ""
 category = "main"
 optional = false
@@ -259,7 +259,7 @@ grpcio-tools = ">=1.51.1,<2.0.0"
 
 [package.source]
 type = "file"
-url = "../commons/py/proto_implementations/dist/proto_implementations-0.1.0.tar.gz"
+url = "../commons/py/proto_implementations/dist/proto_implementations-0.1.2.tar.gz"
 
 [[package]]
 name = "protobuf"
@@ -400,7 +400,7 @@ test = ["websockets"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "28561f788d767fadb3194a559ef3ce99879bea20e17c0aef2dc2dbf1c0cbb78c"
+content-hash = "6159896968a147cc4e420ab355e28759ae6e3b4a1af16f01abef3117dfde960a"
 
 [metadata.files]
 attrs = [
@@ -682,7 +682,7 @@ pluggy = [
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
 proto-implementations = [
-    {file = "proto_implementations-0.1.0.tar.gz", hash = "sha256:3a4bd11668145338539be9834ee81f9cc4ede1de958d0d6c0bf92531e31f323c"},
+    {file = "proto_implementations-0.1.2.tar.gz", hash = "sha256:779c9b61e3dfd00c9d144794bf2f4497f7d6ef914cc224c11b30a0e3e8166e99"},
 ]
 protobuf = [
     {file = "protobuf-4.21.12-cp310-abi3-win32.whl", hash = "sha256:b135410244ebe777db80298297a97fbb4c862c881b4403b71bac9d4107d61fd1"},

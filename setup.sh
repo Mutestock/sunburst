@@ -7,5 +7,6 @@ mkdir ./commons/py/proto_implementations/proto_implementations/protogen
 # Protogen
 echo generating protogen
 python -m grpc_tools.protoc -I./proto --python_out=./commons/py/proto_implementations/proto_implementations/protogen --grpc_python_out=./commons/py/proto_implementations/proto_implementations/protogen ./proto/article.proto
+python -m grpc_tools.protoc -I./proto --python_out=./commons/py/proto_implementations/proto_implementations/protogen --grpc_python_out=./commons/py/proto_implementations/proto_implementations/protogen ./proto/basic.proto
 
 echo Ok

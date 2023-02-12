@@ -12,6 +12,8 @@ LOG_FILE_PATH = SUNBURST_ROOT_DIR + "/logs"
 CONFIG_PATH = SUNBURST_ROOT_DIR + "/config.toml"
 
 CONFIG: dict = {}
+DB_CONF: dict = {}
+DISTRIBUTOR_CONF: dict = {}
 
 for toml_file in [CONFIG_PATH]:
     with open(toml_file, "r") as file_reader:
@@ -19,14 +21,13 @@ for toml_file in [CONFIG_PATH]:
         if content:
             CONFIG.update(rtoml.loads(content))
             
+
+
+if os.getenv("CONTAINERIZED"):
+    DB_CONF = CONFIG["database"]["containerized"]
+    DISTRIBUTOR_CONF = CONFIG["distributor"]["containerized"]
+else:
+    DB_CONF = CONFIG["database"]["local"]
+    DISTRIBUTOR_CONF = CONFIG["distributor"]["dev"]
+          
             
-            
-def get_environment_specific_database_config(config: dict = CONFIG) -> dict:
-    config_intermediate = {}
-    
-    if os.getenv("CONTAINERIZED"):
-        config_intermediate = config["database"]["containerized"]
-    else:
-        config_intermediate = config["database"]["local"]
-        
-    return config_intermediate

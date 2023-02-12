@@ -4,7 +4,6 @@ services:
   database:
     container_name: "sunburst-mongo-primary"
     image: mongo:latest
-    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=some_user
       - MONGO_INITDB_ROOT_PASSWORD=some_pass
@@ -18,10 +17,21 @@ services:
   cache:
     container_name: "sunburst-redis-cache"
     image: redis:latest
-    restart: always
     ports:
       - 20489:6379
     command: redis-server --requirepass some-redis-pass
+    networks:
+      - app-network
+
+  distributor:
+    container_name: "sunburst-distributor"
+    build:
+      context: "."
+      dockerfile: distributor/Dockerfile
+    environment:
+      - CONTAINERIZED=1
+    ports: 
+      - 20488:20488
     networks:
       - app-network
 

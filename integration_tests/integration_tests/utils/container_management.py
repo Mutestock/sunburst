@@ -5,7 +5,7 @@ RUNNING = 'running'
 # src: https://stackoverflow.com/questions/35586900/how-to-check-if-a-docker-instance-is-running
 def is_running(container_name):
     """
-    verify the status of a sniffer container by it's name
+    verify the status of a container by its name
     :param container_name: the name of the container
     :return: Boolean if the status is ok
     """

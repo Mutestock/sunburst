@@ -9,7 +9,9 @@ use std::net::SocketAddr;
 use sunburst_utils::config::is_production;
 use tonic::transport::Server;
 
+use crate::routes::basic_routes::BasicRouter;
 use crate::tonic_proto_out::article_service_server::ArticleServiceServer;
+use crate::tonic_proto_out::basic_service_server::BasicServiceServer;
 use crate::{routes::article_routes::ArticleRouter, utils::config::CONFIG};
 
 #[tokio::main]
@@ -35,6 +37,7 @@ async fn main() -> Result<(), tonic::transport::Error> {
 
     Server::builder()
         .add_service(ArticleServiceServer::new(ArticleRouter {}))
+        .add_service(BasicServiceServer::new(BasicRouter {}))
         .serve(addr)
         .await?;
 

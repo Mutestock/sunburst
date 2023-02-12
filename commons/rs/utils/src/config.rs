@@ -58,6 +58,7 @@ pub struct Tv2 {
 pub struct Distributor {
     pub dev: DistDev,
     pub prod: DistProd,
+    pub containerized: DistContainerized,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -68,6 +69,12 @@ pub struct DistDev {
 
 #[derive(Serialize, Deserialize)]
 pub struct DistProd {
+    pub host: String,
+    pub port: u16,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct DistContainerized {
     pub host: String,
     pub port: u16,
 }

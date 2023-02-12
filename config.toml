@@ -50,3 +50,7 @@ port = 20488
 [distributor.prod]
 host = "0.0.0.0"
 port = 20488
+
+[distributor.containerized]
+host = "sunburst-distributor"
+port = 20488

@@ -2,12 +2,12 @@ from pymongo import MongoClient
 from pymongo.database import Database
 from integration_tests.utils.config import (
     CONFIG,
-    get_environment_specific_database_config,
+    DB_CONF,
 )
 
 
 def get_mongo_connection() -> MongoClient:
-    config_environment_specific = get_environment_specific_database_config()
+    config_environment_specific = DB_CONF
     client = MongoClient(
         config_environment_specific["host"], config_environment_specific["port"]
     )
