@@ -16,9 +16,21 @@ jobs:
       - uses: isbang/compose-action@v1.4.1
         with:
           compose-file: "docker-compose.yml"
+      - name: Add poetry
+      - uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: "1.3.2"
+      - name: Build proto implementations
+        working-directory: ./proto-implementation
+        run: | 
+          poetry shell
+          poetry update
+          poetry build
+          exit
       - name: Run tests
         working-directory: ./integration_tests
         run: |
-          pip install -r requirements.txt
+          poetry shell
+          poetry update
           chmod +x ./run_tests.sh
           ./run_tests.sh
