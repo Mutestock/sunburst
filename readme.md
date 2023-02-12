@@ -9,3 +9,5 @@ Current the goal is to show experise in: Python, Rust, C#, Typescript, Javascrip
 The name "sunburst" refers to the MTG mechanic "sunburst". It adds power through multiple colors. Colors are techs here
 
 Note that all passwords are placeholders. They'll be swapped and managed properly with secrets whenever deployment becomes relevant.
+
+Note that I am not suggesting a setup like this is useful. Preferably you'd want to keep your stack simple IRL. This is just for demo purposes.

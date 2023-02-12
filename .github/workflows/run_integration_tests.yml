@@ -26,6 +26,15 @@ jobs:
           poetry build
       - name: Run tests
         working-directory: ./integration_tests
+        # This is quite a non-solution to a hashing problem.
+        # We don't want to upload the package to github.
+        # So we have to build it in the pipeline for testing
+        # But building the package means it will have a different hash than the one exported by poetry
+        # Removing the package and readding it auto-assigns the new hash to the lock
+        # Which is then exported and installed.
+        # The real solution is probably to upload the package to the releases page on github
+        # And set the package dependency to a github repo in the pyproject.toml file.
+        # This does complicate things further, though.
         run: |
           poetry remove proto-implementations
           poetry add ../commons/py/proto_implementations/dist/proto_implementations-0.1.2.tar.gz
