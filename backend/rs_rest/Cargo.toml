@@ -6,9 +6,28 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+
+# Grpc
+
 tonic = "0.8.3"
 prost="0.11.6"
+
+# REST
+axum = "0.6.4"
+
+# Runtime 
 tokio="1.25.0"
 
+# Serialization
 serde = {version="1.0.152", features = ["derive"]}
 serde_json = "1.0.92"
+
+# Utils
+lazy_static = "1.4.0"
+
+# Custom
+sunburst_utils = { version = "0.1.0", path="../commons/rs/utils"}
+sunburst_models = { version = "0.1.0", path="../commons/rs/models"}
+
+[build-dependencies]
+tonic-build="0.8.4"
