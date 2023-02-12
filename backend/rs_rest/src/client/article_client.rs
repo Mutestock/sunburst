@@ -4,9 +4,10 @@ use crate::tonic_proto_out::article_service_client::ArticleServiceClient;
 use crate::tonic_proto_out::{
     ReadArticleListBySearchtermRequest, ReadArticleListBySearchtermResponse,
     ReadArticleListBySiteRequest, ReadArticleListBySiteResponse, ReadArticleListRequest,
-    ReadArticleListResponse,
+    ReadArticleListResponse
 };
 use crate::utils::config::DISTRIBUTOR_URL;
+
 
 async fn make_client() -> Result<ArticleServiceClient<Channel>, tonic::transport::Error> {
     ArticleServiceClient::connect(DISTRIBUTOR_URL.to_string()).await
