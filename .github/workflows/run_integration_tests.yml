@@ -20,6 +20,7 @@ jobs:
       - uses: abatilo/actions-poetry@v2
         with:
           poetry-version: "1.3.2"
+      - name: Build python proto implementation package
         working-directory: ./proto-implementation
         run: | 
           poetry shell
