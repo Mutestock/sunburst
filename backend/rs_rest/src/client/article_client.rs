@@ -4,10 +4,9 @@ use crate::tonic_proto_out::article_service_client::ArticleServiceClient;
 use crate::tonic_proto_out::{
     ReadArticleListBySearchtermRequest, ReadArticleListBySearchtermResponse,
     ReadArticleListBySiteRequest, ReadArticleListBySiteResponse, ReadArticleListRequest,
-    ReadArticleListResponse
+    ReadArticleListResponse,
 };
 use crate::utils::config::DISTRIBUTOR_URL;
-
 
 async fn make_client() -> Result<ArticleServiceClient<Channel>, tonic::transport::Error> {
     ArticleServiceClient::connect(DISTRIBUTOR_URL.to_string()).await
@@ -49,6 +48,6 @@ pub async fn grpc_read_article_list_by_search_term(
         .read_article_list_by_searchterm(request)
         .await
         .expect("Could not send read article by search term request");
-    
+
     Ok(response.into_inner())
 }
