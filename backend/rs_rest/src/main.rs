@@ -1,8 +1,8 @@
-use std::net::SocketAddr;
-
 use axum::Router;
-use routes::article_routes::RegisterArtistRoutes;
+use routes::article_routes::RegisterArticleRoutes;
 use tower_http::cors::CorsLayer;
+
+use crate::{routes::basic_routes::RegisterBasicRoutes, utils::config::RS_REST_URL};
 
 mod client;
 mod routes;
@@ -13,13 +13,13 @@ mod utils;
 async fn main() {
     tracing_subscriber::fmt::init();
     let app = Router::new()
-        .and_register_artist_routes()
+        .and_register_article_routes()
+        .and_register_basic_routes()
         .layer(CorsLayer::permissive());
 
-    let addr = SocketAddr::from((([127, 0, 0, 1]), 20490));
-    tracing::debug!("Listening on {:?}", addr);
-    axum::Server::bind(&addr)
+    tracing::debug!("Listening on {}", &RS_REST_URL.to_string());
+    axum::Server::bind(&RS_REST_URL.to_string().parse().unwrap())
         .serve(app.into_make_service())
         .await
-        .unwrap(); 
+        .unwrap();
 }

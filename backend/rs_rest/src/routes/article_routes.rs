@@ -9,7 +9,7 @@ use crate::{
     utils::model_changes::ArticlesGrpcBind,
 };
 
-const BASE_ROUTE: &'static str = "/articles";
+const BASE_ROUTE: &'static str = "/article";
 
 async fn read_article_list_route() -> impl IntoResponse {
     (
@@ -52,12 +52,12 @@ async fn read_article_list_by_searchterm_route(
     )
 }
 
-pub trait RegisterArtistRoutes {
-    fn and_register_artist_routes(self) -> Self;
+pub trait RegisterArticleRoutes {
+    fn and_register_article_routes(self) -> Self;
 }
 
-impl RegisterArtistRoutes for Router {
-    fn and_register_artist_routes(self) -> Self {
+impl RegisterArticleRoutes for Router {
+    fn and_register_article_routes(self) -> Self {
         self.route(BASE_ROUTE, get(read_article_list_route))
             .route(
                 &format!("{}/site/", BASE_ROUTE),

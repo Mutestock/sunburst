@@ -23,4 +23,19 @@ lazy_static::lazy_static! {
         }
         format!("http://{}:{}", host, port)
     };
+    pub static ref RS_REST_URL: String = {
+
+        let host: &str;
+        let port: u16;
+
+        if is_production(){
+            host = &CONFIG.rest.rs.prod.host;
+            port = CONFIG.rest.rs.prod.port;
+        }
+        else{
+            host = &CONFIG.rest.rs.dev.host;
+            port = CONFIG.rest.rs.dev.port;
+        }
+        format!("{}:{}", host, port)
+    };
 }
