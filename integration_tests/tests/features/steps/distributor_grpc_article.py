@@ -4,7 +4,11 @@ from integration_tests.utils.config import DISTRIBUTOR_CONF, CONFIG
 from integration_tests.connection import mongo_connection
 from proto_implementations.protogen.basic_pb2_grpc import BasicServiceStub
 from proto_implementations.protogen.basic_pb2 import HealthCheckRequest
-from proto_implementations.protogen.article_pb2 import ReadArticleListRequest, ReadArticleListBySearchtermRequest, ReadArticleListBySiteRequest
+from proto_implementations.protogen.article_pb2 import (
+    ReadArticleListRequest,
+    ReadArticleListBySearchtermRequest,
+    ReadArticleListBySiteRequest,
+)
 from proto_implementations.protogen.article_pb2_grpc import ArticleServiceStub
 import grpc
 
@@ -13,17 +17,19 @@ import grpc
 def step_impl(_):
     assert is_running(CONFIG["database"]["container_name"])
     assert mongo_connection.get_mongo_connection().admin.command("ismaster") != None
-    with grpc.insecure_channel(f"{DISTRIBUTOR_CONF['host']}:{DISTRIBUTOR_CONF['port']}") as channel:
+    with grpc.insecure_channel(
+        f"{DISTRIBUTOR_CONF['host']}:{DISTRIBUTOR_CONF['port']}"
+    ) as channel:
         stub = BasicServiceStub(channel)
         response = stub.HealthCheck(HealthCheckRequest())
         assert response.msg == "Ok"
-    
-    
 
 
 @when("a request for reading all articles from the distributor is made")
 def step_impl(context):
-    with grpc.insecure_channel(f"{DISTRIBUTOR_CONF['host']}:{DISTRIBUTOR_CONF['port']}") as channel:
+    with grpc.insecure_channel(
+        f"{DISTRIBUTOR_CONF['host']}:{DISTRIBUTOR_CONF['port']}"
+    ) as channel:
         stub = ArticleServiceStub(channel)
         response = stub.ReadArticleList(ReadArticleListRequest())
         assert response != None
@@ -38,9 +44,13 @@ def step_impl(context):
 
 @when("a request for reading all articles by search term from the distributor is made")
 def step_impl(context):
-    with grpc.insecure_channel(f"{DISTRIBUTOR_CONF['host']}:{DISTRIBUTOR_CONF['port']}") as channel:
+    with grpc.insecure_channel(
+        f"{DISTRIBUTOR_CONF['host']}:{DISTRIBUTOR_CONF['port']}"
+    ) as channel:
         stub = ArticleServiceStub(channel)
-        response = stub.ReadArticleListBySearchterm(ReadArticleListBySearchtermRequest(search_term="Ukraine"))
+        response = stub.ReadArticleListBySearchterm(
+            ReadArticleListBySearchtermRequest(search_term="Ukraine")
+        )
         assert response != None
         context.articles = response.articles
 
@@ -52,7 +62,9 @@ def step_impl(context):
 
 @when("a request for reading all articles by a site from the distributor is made")
 def step_impl(context):
-    with grpc.insecure_channel(f"{DISTRIBUTOR_CONF['host']}:{DISTRIBUTOR_CONF['port']}") as channel:
+    with grpc.insecure_channel(
+        f"{DISTRIBUTOR_CONF['host']}:{DISTRIBUTOR_CONF['port']}"
+    ) as channel:
         stub = ArticleServiceStub(channel)
         response = stub.ReadArticleListBySite(ReadArticleListBySiteRequest(site="CNN"))
         assert response != None
