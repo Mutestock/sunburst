@@ -8,6 +8,7 @@ pub struct Config {
     pub scraper: Scraper,
     pub distributor: Distributor,
     pub cache: Cache,
+    pub rest: Rest,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -101,6 +102,37 @@ pub struct CacheContainerized {
     pub host: String,
     pub port: u16,
     pub password: String,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct Rest {
+    pub rs: RsRest,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct RsRest {
+    pub container_name: String,
+    pub dev: RsRestDev,
+    pub prod: RsRestProd,
+    pub containerized: RsRestContainerized,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct RsRestDev {
+    pub host: String,
+    pub port: u16,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct RsRestProd {
+    pub host: String,
+    pub port: u16,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct RsRestContainerized {
+    pub host: String,
+    pub port: u16,
 }
 
 pub fn read_config(path: &str) -> Config {

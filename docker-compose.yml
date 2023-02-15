@@ -35,6 +35,18 @@ services:
     networks:
       - app-network
 
+  rs_rest:
+    container_name: "sunburst-rs-rest"
+    build:
+      context: "."
+      dockerfile: backend/rs_rest/Dockerfile
+    environment:
+      - CONTAINERIZED=1
+    ports:
+      - 22550:22550
+    networks: 
+      - app-network
+
 
 volumes:
   data:

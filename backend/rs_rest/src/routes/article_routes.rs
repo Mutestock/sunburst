@@ -60,11 +60,11 @@ impl RegisterArticleRoutes for Router {
     fn and_register_article_routes(self) -> Self {
         self.route(BASE_ROUTE, get(read_article_list_route))
             .route(
-                &format!("{}/site/", BASE_ROUTE),
+                &format!("{}/site=:site", BASE_ROUTE),
                 get(read_article_list_by_site_route),
             )
             .route(
-                &format!("{}/search-term/", BASE_ROUTE),
+                &format!("{}/search-term=:search-term", BASE_ROUTE),
                 get(read_article_list_by_searchterm_route),
             )
     }

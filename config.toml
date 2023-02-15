@@ -1,38 +1,39 @@
+
 # All passwords here should be gone and saved in secrets instead in production.
 
 [database]
 container_name = "sunburst-mongo-primary"
-test_db_name="test_db"
-dev_db_name="dev_db"
-prod_db_name="prod_db"
+test_db_name = "test_db"
+dev_db_name = "dev_db"
+prod_db_name = "prod_db"
 
 [database.local]
-host="localhost"
-port=20487
-username="some_user"
-password="some_pass"
+host = "localhost"
+port = 20487
+username = "some_user"
+password = "some_pass"
 
 [database.containerized]
-host="sunburst-mongo-primary"
-port=27017
-username="some_user"
-password="some_pass"
+host = "sunburst-mongo-primary"
+port = 27017
+username = "some_user"
+password = "some_pass"
 
 [cache]
-container_name="sunburst-redis-cache"
+container_name = "sunburst-redis-cache"
 cached_common_article_search_terms = ["Ukraine", "Russia", "war"]
 cached_sites = ["TV2"]
 cache_common_articles_refresh_rate_seconds = 120
 
 [cache.local]
-host="localhost"
-port=20489
-password="some-redis-pass"
+host = "localhost"
+port = 20489
+password = "some-redis-pass"
 
 [cache.containerized]
-host="sunburst-redis-cache"
-port=6379
-password="some-redis-pass"
+host = "sunburst-redis-cache"
+port = 6379
+password = "some-redis-pass"
 
 [scraper]
 # osinfo placeholder for formatting. 
@@ -54,3 +55,19 @@ port = 20488
 [distributor.containerized]
 host = "sunburst-distributor"
 port = 20488
+
+[rest]
+[rest.rs]
+container_name = "sunburst-rs-rest"
+
+[rest.rs.dev]
+host = "127.0.0.1"
+port = 22550
+
+[rest.rs.prod]
+host = "0.0.0.0"
+port = 22550
+
+[rest.rs.containerized]
+host = "sunburst-rs-rest"
+port = 22550

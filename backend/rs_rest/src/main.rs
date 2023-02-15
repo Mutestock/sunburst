@@ -2,7 +2,7 @@ use axum::Router;
 use routes::article_routes::RegisterArticleRoutes;
 use tower_http::cors::CorsLayer;
 
-use crate::{routes::basic_routes::RegisterBasicRoutes, utils::config::RS_REST_URL};
+use crate::{routes::basic_routes::RegisterBasicRoutes, utils::config::{RS_REST_URL, DISTRIBUTOR_URL}};
 
 mod client;
 mod routes;
@@ -18,6 +18,9 @@ async fn main() {
         .layer(CorsLayer::permissive());
 
     tracing::debug!("Listening on {}", &RS_REST_URL.to_string());
+    println!("RS-REST:: Axum Listening on {}", &RS_REST_URL.to_string());
+    println!("RS-REST:: Expecting distributor on {}", &DISTRIBUTOR_URL.to_string());
+
     axum::Server::bind(&RS_REST_URL.to_string().parse().unwrap())
         .serve(app.into_make_service())
         .await

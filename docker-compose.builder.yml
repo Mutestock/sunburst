@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  distributor:
+    container_name: "sunburst-distributor"
+    build: 
+      context: "."
+      dockerfile: distributor/Dockerfile
+    image: mutestock/sunburst-distributor
+
+  rs_rest:
+    container_name: "sunburst-rs-rest"
+    build: 
+      context: "."
+      dockerfile: backend/rs-rest/Dockerfile
+    image: mutestock/sunburst-rs-rest
+    
+

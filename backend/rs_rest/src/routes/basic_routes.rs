@@ -13,6 +13,6 @@ pub trait RegisterBasicRoutes {
 
 impl RegisterBasicRoutes for Router {
     fn and_register_basic_routes(self) -> Self {
-        self.route(&format!("{}/health", BASE_ROUTE), get(health_check_route))
+        self.route(&format!("{}health", BASE_ROUTE), get(health_check_route))
     }
 }
