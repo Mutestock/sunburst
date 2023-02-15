@@ -28,7 +28,7 @@ lazy_static::lazy_static! {
         let host: &str;
         let port: u16;
 
-        if is_production(){
+        if is_production() || is_containerized(){
             host = &CONFIG.rest.rs.prod.host;
             port = CONFIG.rest.rs.prod.port;
         }
