@@ -2,6 +2,7 @@ use tonic::transport::Channel;
 
 use crate::tonic_proto_out::article_service_client::ArticleServiceClient;
 use crate::tonic_proto_out::{
+    ReadArticleCountBySearchSiteRequest, ReadArticleCountBySearchSiteResponse,
     ReadArticleListBySearchtermRequest, ReadArticleListBySearchtermResponse,
     ReadArticleListBySiteRequest, ReadArticleListBySiteResponse, ReadArticleListRequest,
     ReadArticleListResponse,
@@ -48,6 +49,23 @@ pub async fn grpc_read_article_list_by_search_term(
         .read_article_list_by_searchterm(request)
         .await
         .expect("Could not send read article by search term request");
+
+    Ok(response.into_inner())
+}
+
+pub async fn grpc_read_article_count_by_site_search_term(
+    site: &str,
+    search_term: &str,
+) -> Result<ReadArticleCountBySearchSiteResponse, tonic::transport::Error> {
+    let mut client = make_client().await?;
+    let request = tonic::Request::new(ReadArticleCountBySearchSiteRequest {
+        site: site.into(),
+        search_term: search_term.into(),
+    });
+    let response = client
+        .read_article_count_by_search_site(request)
+        .await
+        .expect("Could not send article count request");
 
     Ok(response.into_inner())
 }

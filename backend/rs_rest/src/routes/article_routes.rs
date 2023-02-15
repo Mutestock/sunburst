@@ -3,10 +3,10 @@ use hyper::StatusCode;
 
 use crate::{
     client::article_client::{
-        grpc_read_article_list, grpc_read_article_list_by_search_term,
-        grpc_read_article_list_by_site,
+        grpc_read_article_count_by_site_search_term, grpc_read_article_list,
+        grpc_read_article_list_by_search_term, grpc_read_article_list_by_site,
     },
-    utils::model_changes::ArticlesGrpcBind,
+    utils::model_changes::{ArticleCountBind, ArticlesGrpcBind},
 };
 
 const BASE_ROUTE: &'static str = "/article";
@@ -52,6 +52,20 @@ async fn read_article_list_by_searchterm_route(
     )
 }
 
+async fn read_article_count_by_search_site_route(
+    Path((site, search_term)): Path<(String, String)>,
+) -> impl IntoResponse {
+    (
+        StatusCode::OK,
+        Json(
+            grpc_read_article_count_by_site_search_term(&site, &search_term)
+                .await
+                .expect("Could not read article count by search term on route")
+                .to_stats(),
+        ),
+    )
+}
+
 pub trait RegisterArticleRoutes {
     fn and_register_article_routes(self) -> Self;
 }
@@ -66,6 +80,10 @@ impl RegisterArticleRoutes for Router {
             .route(
                 &format!("{}/search-term=:search-term", BASE_ROUTE),
                 get(read_article_list_by_searchterm_route),
+            )
+            .route(
+                &format!("{}/count/site=:site/search=:search-term", BASE_ROUTE),
+                get(read_article_count_by_search_site_route),
             )
     }
 }

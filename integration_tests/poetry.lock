@@ -247,7 +247,7 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "proto-implementations"
-version = "0.1.2"
+version = "0.1.4"
 description = ""
 category = "main"
 optional = false
@@ -259,7 +259,7 @@ grpcio-tools = ">=1.51.1,<2.0.0"
 
 [package.source]
 type = "file"
-url = "../commons/py/proto_implementations/dist/proto_implementations-0.1.2.tar.gz"
+url = "../commons/py/proto_implementations/dist/proto_implementations-0.1.4.tar.gz"
 
 [[package]]
 name = "protobuf"
@@ -344,7 +344,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "setuptools"
-version = "67.2.0"
+version = "67.3.2"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 category = "main"
 optional = false
@@ -400,7 +400,7 @@ test = ["websockets"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "6159896968a147cc4e420ab355e28759ae6e3b4a1af16f01abef3117dfde960a"
+content-hash = "aa4b81381cd87247257b82e5119bea5ff73c145030dd387e8e8b16c45667abd1"
 
 [metadata.files]
 attrs = [
@@ -682,7 +682,7 @@ pluggy = [
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
 ]
 proto-implementations = [
-    {file = "proto_implementations-0.1.2.tar.gz", hash = "sha256:779c9b61e3dfd00c9d144794bf2f4497f7d6ef914cc224c11b30a0e3e8166e99"},
+    {file = "proto_implementations-0.1.4.tar.gz", hash = "sha256:8ee1c6f243685bc3f9aac559404dda402387e2ea23748f98a8c94cc701710fb0"},
 ]
 protobuf = [
     {file = "protobuf-4.21.12-cp310-abi3-win32.whl", hash = "sha256:b135410244ebe777db80298297a97fbb4c862c881b4403b71bac9d4107d61fd1"},
@@ -854,8 +854,8 @@ rtoml = [
     {file = "rtoml-0.9.0.tar.gz", hash = "sha256:113f2e133d152d9424269c475b4a7d0679987078b543e88fcb16c870dc2c460d"},
 ]
 setuptools = [
-    {file = "setuptools-67.2.0-py3-none-any.whl", hash = "sha256:16ccf598aab3b506593c17378473978908a2734d7336755a8769b480906bec1c"},
-    {file = "setuptools-67.2.0.tar.gz", hash = "sha256:b440ee5f7e607bb8c9de15259dba2583dd41a38879a7abc1d43a71c59524da48"},
+    {file = "setuptools-67.3.2-py3-none-any.whl", hash = "sha256:bb6d8e508de562768f2027902929f8523932fcd1fb784e6d573d2cafac995a48"},
+    {file = "setuptools-67.3.2.tar.gz", hash = "sha256:95f00380ef2ffa41d9bba85d95b27689d923c93dfbafed4aecd7cf988a25e012"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},

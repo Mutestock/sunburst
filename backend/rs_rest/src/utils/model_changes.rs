@@ -1,5 +1,6 @@
+use crate::tonic_proto_out::ReadArticleCountBySearchSiteResponse;
 use chrono::NaiveDateTime;
-use sunburst_models::article::Article;
+use sunburst_models::{article::Article, article_count::ArticleCount};
 
 use crate::tonic_proto_out::ArticleMessage;
 
@@ -36,5 +37,19 @@ pub trait ArticlesGrpcBind {
 impl ArticlesGrpcBind for Vec<ArticleMessage> {
     fn to_articles(self) -> Vec<Article> {
         self.into_iter().map(|x| x.to_article()).collect()
+    }
+}
+
+pub trait ArticleCountBind {
+    fn to_stats(self) -> ArticleCount;
+}
+
+impl ArticleCountBind for ReadArticleCountBySearchSiteResponse {
+    fn to_stats(self) -> ArticleCount {
+        ArticleCount {
+            total: self.total,
+            cnt_contained_search_term: self.cnt_contained_search_term,
+            cnt_not_contained_search_term: self.cnt_not_contained_search_term,
+        }
     }
 }

@@ -21,3 +21,9 @@ Feature: Making article requests against the Rust Rest service
         When a request for reading all articles by site from the rust rest service is made
         Then we receive a list of all articles which come from that site from the rust rest service
 
+    Scenario: Sending a request to get article count statistics from the rust rest service
+        Given mongodb is online
+        And the distributor is online
+        And the rest service is online
+        When a request for reading article count statistics from the rust rest service is made
+        Then we receive article count statistics from the rust rest service

@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import proto_implementations.protogen.article_pb2 as article__pb2
+from . import article_pb2 as article__pb2
 
 
 class ArticleServiceStub(object):
@@ -29,6 +29,11 @@ class ArticleServiceStub(object):
                 request_serializer=article__pb2.ReadArticleListBySiteRequest.SerializeToString,
                 response_deserializer=article__pb2.ReadArticleListBySiteResponse.FromString,
                 )
+        self.ReadArticleCountBySearchSite = channel.unary_unary(
+                '/article.ArticleService/ReadArticleCountBySearchSite',
+                request_serializer=article__pb2.ReadArticleCountBySearchSiteRequest.SerializeToString,
+                response_deserializer=article__pb2.ReadArticleCountBySearchSiteResponse.FromString,
+                )
 
 
 class ArticleServiceServicer(object):
@@ -52,6 +57,12 @@ class ArticleServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ReadArticleCountBySearchSite(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ArticleServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -69,6 +80,11 @@ def add_ArticleServiceServicer_to_server(servicer, server):
                     servicer.ReadArticleListBySite,
                     request_deserializer=article__pb2.ReadArticleListBySiteRequest.FromString,
                     response_serializer=article__pb2.ReadArticleListBySiteResponse.SerializeToString,
+            ),
+            'ReadArticleCountBySearchSite': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReadArticleCountBySearchSite,
+                    request_deserializer=article__pb2.ReadArticleCountBySearchSiteRequest.FromString,
+                    response_serializer=article__pb2.ReadArticleCountBySearchSiteResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -128,5 +144,22 @@ class ArticleService(object):
         return grpc.experimental.unary_unary(request, target, '/article.ArticleService/ReadArticleListBySite',
             article__pb2.ReadArticleListBySiteRequest.SerializeToString,
             article__pb2.ReadArticleListBySiteResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ReadArticleCountBySearchSite(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/article.ArticleService/ReadArticleCountBySearchSite',
+            article__pb2.ReadArticleCountBySearchSiteRequest.SerializeToString,
+            article__pb2.ReadArticleCountBySearchSiteResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

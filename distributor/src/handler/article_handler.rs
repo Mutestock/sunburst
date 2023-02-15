@@ -1,10 +1,14 @@
 use crate::{
-    caching::keys::{
-        READ_LIST_ARTICLE_CACHE_KEY, READ_LIST_ARTICLE_SEARCH_TERM_CACHE_KEY_PREFIX,
-        READ_LIST_ARTICLE_SITE_CACHE_KEY_PREFIX,
+    caching::{
+        caching_tools::cache_something,
+        keys::{
+            formatted_cnt_search_site_cache_key, formatted_search_term_cache_key,
+            formatted_site_cache_key, READ_LIST_ARTICLE_CACHE_KEY,
+        },
     },
     tonic_proto_out::{
-        ArticleMessage, ReadArticleListBySearchtermRequest, ReadArticleListBySearchtermResponse,
+        ArticleMessage, ReadArticleCountBySearchSiteRequest, ReadArticleCountBySearchSiteResponse,
+        ReadArticleListBySearchtermRequest, ReadArticleListBySearchtermResponse,
         ReadArticleListBySiteRequest, ReadArticleListBySiteResponse, ReadArticleListRequest,
         ReadArticleListResponse,
     },
@@ -12,8 +16,9 @@ use crate::{
 use futures::stream::StreamExt;
 use mongodb::bson::{doc, Document};
 use redis::AsyncCommands;
+
 use sunburst_connection::{mongo_connection::connect_mongo, redis_connection};
-use sunburst_models::article::Article;
+use sunburst_models::{article::Article, article_count::ArticleCount};
 
 use crate::utils::config::{MONGO_CONN_STRING, REDIS_CONN_STRING};
 
@@ -35,7 +40,7 @@ pub async fn handle_read_list(
         }
         None => {
             let articles = read_articles_filter(None).await?;
-            cache_articles(&articles, READ_LIST_ARTICLE_CACHE_KEY)
+            cache_something(&articles, READ_LIST_ARTICLE_CACHE_KEY)
                 .await
                 .expect("Could not cache articles for handle read list");
             articles
@@ -48,17 +53,6 @@ pub async fn handle_read_list(
     };
 
     Ok(response)
-}
-
-pub fn formatted_search_term_cache_key(search_term: &str) -> String {
-    format!(
-        "{}{}",
-        READ_LIST_ARTICLE_SEARCH_TERM_CACHE_KEY_PREFIX, search_term
-    )
-}
-
-pub fn formatted_site_cache_key(site: &str) -> String {
-    format!("{}{}", READ_LIST_ARTICLE_SITE_CACHE_KEY_PREFIX, site)
 }
 
 pub async fn handle_read_list_by_searchterm(
@@ -84,7 +78,7 @@ pub async fn handle_read_list_by_searchterm(
                 "name": &format!("/{}/i",request.search_term)
             }))
             .await?;
-            cache_articles(&articles, &cache_key)
+            cache_something(&articles, &cache_key)
                 .await
                 .expect("Could not cache articles for handle read list");
             articles
@@ -119,10 +113,10 @@ pub async fn handle_read_article_list_by_site(
         }
         None => {
             let articles = read_articles_filter(Some(doc! {
-                "site": &format!("{}",request.site)
+                "site": request.site
             }))
             .await?;
-            cache_articles(&articles, &cache_key)
+            cache_something(&articles, &cache_key)
                 .await
                 .expect("Could not cache articles for handle read list");
             articles
@@ -135,6 +129,36 @@ pub async fn handle_read_article_list_by_site(
     };
 
     Ok(response)
+}
+
+pub async fn handle_read_article_count_by_search_site(
+    request: ReadArticleCountBySearchSiteRequest,
+) -> Result<ReadArticleCountBySearchSiteResponse, mongodb::error::Error> {
+    let mut red_conn = redis_connection::connect_redis(&REDIS_CONN_STRING)
+        .await
+        .expect("Could not establish redis connection");
+
+    let cache_key = formatted_cnt_search_site_cache_key(&request.search_term, &request.site);
+    let current_cache_contents: Option<String> = red_conn
+        .get(&cache_key)
+        .await
+        .expect("Could not receive cache contents");
+
+    let article_count: ArticleCount = match current_cache_contents {
+        Some(v) => {
+            serde_json::from_str(&v).expect("Could not parse cache contents to article count")
+        }
+        None => {
+            let article_count = make_article_count(&request.site, &request.search_term).await?;
+            article_count
+        }
+    };
+
+    Ok(ReadArticleCountBySearchSiteResponse {
+        total: article_count.total,
+        cnt_contained_search_term: article_count.cnt_contained_search_term,
+        cnt_not_contained_search_term: article_count.cnt_not_contained_search_term,
+    })
 }
 
 async fn articles_to_article_messages(articles: &[Article]) -> Vec<ArticleMessage> {
@@ -174,14 +198,24 @@ pub async fn read_articles_filter(
     Ok(articles)
 }
 
-pub async fn cache_articles(
-    articles: &[Article],
-    cache_key: &str,
-) -> Result<(), redis::RedisError> {
-    let mut red_conn = redis_connection::connect_redis(&REDIS_CONN_STRING).await?;
-    let value = serde_json::to_string(&articles).unwrap();
-    // This might get too big...
-    let _: () = red_conn.set(cache_key, &value).await?;
-
-    Ok(())
+pub async fn make_article_count(
+    site: &str,
+    search_term: &str,
+) -> Result<ArticleCount, mongodb::error::Error> {
+    let articles = read_articles_filter(Some(doc! {
+        "site": site
+    }))
+    .await?;
+    let total = articles.len();
+    let articles_with_search_term = articles
+        .into_iter()
+        .filter(|x| {
+            x.name.contains(search_term) || x.tags_and_categories.contains(&search_term.to_owned())
+        })
+        .collect::<Vec<Article>>();
+    Ok(ArticleCount::new(
+        total as i64,
+        articles_with_search_term.len() as i64,
+        (total - articles_with_search_term.len()) as i64,
+    ))
 }

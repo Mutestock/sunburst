@@ -22,7 +22,7 @@ lazy_static = "1.4.0"
 # Custom
 sunburst_utils = { version = "0.1.0", path="../commons/rs/utils"}
 sunburst_connection = { version = "0.1.0", path="../commons/rs/connection"}
-sunburst_models = { version = "0.1.0", path="../commons/rs/models"}
+sunburst_models = { version = "0.1.2", path="../commons/rs/models"}
 
 [build-dependencies]
 tonic-build="0.8.4"

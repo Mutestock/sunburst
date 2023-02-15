@@ -3,8 +3,10 @@ use std::time::Duration;
 use mongodb::bson::doc;
 
 use crate::caching::keys::*;
-use crate::handler::article_handler::{cache_articles, read_articles_filter, formatted_search_term_cache_key, formatted_site_cache_key};
+use crate::handler::article_handler::{make_article_count, read_articles_filter};
 use crate::utils::config::CONFIG;
+
+use super::caching_tools::cache_something;
 
 pub async fn start_sequence() {
     tokio::task::spawn(async {
@@ -13,7 +15,7 @@ pub async fn start_sequence() {
                 .await
                 .expect("Could not read articles for the cache sequence");
 
-            cache_articles(&articles, READ_LIST_ARTICLE_CACHE_KEY)
+            cache_something(&articles, READ_LIST_ARTICLE_CACHE_KEY)
                 .await
                 .expect("Could not cache articles for cache sequence");
 
@@ -24,7 +26,7 @@ pub async fn start_sequence() {
                 .await
                 .expect("Could not read articles for the cache sequence");
 
-                cache_articles(&articles, &formatted_search_term_cache_key(search_term))
+                cache_something(&articles, &formatted_search_term_cache_key(search_term))
                     .await
                     .expect("Could not cache articles for cache sequence");
             }
@@ -36,9 +38,21 @@ pub async fn start_sequence() {
                 .await
                 .expect("Could not read articles for the cache sequence");
 
-                cache_articles(&articles, &formatted_site_cache_key(site))
+                cache_something(&articles, &formatted_site_cache_key(site))
                     .await
                     .expect("Could not cache articles for cache sequence");
+            }
+
+            for site in CONFIG.cache.cached_sites.iter() {
+                for search_term in CONFIG.cache.cached_common_article_search_terms.iter() {
+                    let article_count = make_article_count(site, search_term)
+                        .await
+                        .expect("Could not make article count for the cache sequence");
+                    let cache_key = formatted_cnt_search_site_cache_key(search_term, site);
+                    cache_something(article_count, &cache_key)
+                        .await
+                        .expect("Could not cache article count");
+                }
             }
 
             tokio::time::sleep(Duration::from_secs(

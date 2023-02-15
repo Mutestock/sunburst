@@ -75,3 +75,16 @@ def step_impl(context):
 def step_impl(context):
     assert context.articles is not None
     assert len(context.articles) >= 0
+
+
+@when('A request for reading article count statistics from the rust rest service is made')
+def step_impl(context):
+    r = requests.get(f"http://{RS_REST_CONF['host']}:{RS_REST_CONF['port']}/article/count/site=TV2/search=thing")
+    assert r.status_code == 200
+    context.article_count = r.json()
+    
+    
+@then("we receive article count statistics from the rust rest service")
+def step_impl(context):
+    
+    assert context.article_count["total"] >= 0

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "proto-implementations"
-version = "0.1.2"
+version = "0.1.4"
 description = ""
 authors = ["Mutestock <doublenegative@protonmail.com>"]
 readme = "README.md"
