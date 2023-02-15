@@ -37,7 +37,7 @@ jobs:
         # This does complicate things further, though.
         run: |
           poetry remove proto-implementations
-          poetry add ../commons/py/proto_implementations/dist/proto_implementations-0.1.2.tar.gz
+          poetry add ../commons/py/proto_implementations/dist/proto_implementations-0.1.4.tar.gz
           poetry export > requirements.txt
           pip install -r requirements.txt
           chmod +x ./run_tests.sh
