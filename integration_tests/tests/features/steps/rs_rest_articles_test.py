@@ -86,5 +86,4 @@ def step_impl(context):
     
 @then("we receive article count statistics from the rust rest service")
 def step_impl(context):
-    
     assert context.article_count["total"] >= 0
