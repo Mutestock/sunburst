@@ -28,7 +28,7 @@ services:
     image: mutestock/sunburst-distributor:latest
     environment:
       - CONTAINERIZED=1
-    ports: 
+    ports:
       - 20488:20488
     networks:
       - app-network
@@ -40,9 +40,18 @@ services:
       - CONTAINERIZED=1
     ports:
       - 22550:22550
-    networks: 
+    networks:
       - app-network
 
+  py_rest:
+    cotnainer_name: "sunburst-py-rest"
+    image: mutestock/sunburst-py-rest:latest
+    environment:
+      - CONTAINERIZED=1
+    ports:
+      - 22551:22551
+    networks:
+      - app-network
 
 volumes:
   data:

@@ -71,3 +71,18 @@ port = 22550
 [rest.rs.containerized]
 host = "sunburst-rs-rest"
 port = 22550
+
+[rest.py]
+container_name = "sunburst-py-rest"
+
+[rest.py.dev]
+host = "127.0.0.1"
+port = 22551
+
+[rest.py.prod]
+host = "0.0.0.0"
+port = 22551
+
+[rest.py.containerized]
+host = "sunburst-py-rest"
+port = 22551

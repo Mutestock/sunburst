@@ -1,30 +1,9 @@
 from behave import *
-import grpc
-from proto_implementations.protogen.basic_pb2 import HealthCheckRequest
-from integration_tests.utils.config import DISTRIBUTOR_CONF, CONFIG, RS_REST_CONF
-from integration_tests.utils.container_management import is_running
-from integration_tests.connection import mongo_connection
-from proto_implementations.protogen.basic_pb2_grpc import BasicServiceStub
+from integration_tests.utils.config import RS_REST_CONF
 import requests
 
 
-@given("mongodb is online")
-def step_impl(_):
-    assert is_running(CONFIG["database"]["container_name"])
-    assert mongo_connection.get_mongo_connection().admin.command("ismaster") != None
-
-
-@given("the distributor is online")
-def step_impl(_):
-    with grpc.insecure_channel(
-        f"{DISTRIBUTOR_CONF['host']}:{DISTRIBUTOR_CONF['port']}"
-    ) as channel:
-        stub = BasicServiceStub(channel)
-        response = stub.HealthCheck(HealthCheckRequest())
-        assert response.msg == "Ok"
-
-
-@given("the rest service is online")
+@given("the rust rest service is online")
 def step_impl(_):
     r = requests.get(f"http://{RS_REST_CONF['host']}:{RS_REST_CONF['port']}/health")
     assert r.status_code == 200

@@ -14,7 +14,7 @@ CONFIG_PATH = SUNBURST_ROOT_DIR + "/config.toml"
 CONFIG: dict = {}
 DB_CONF: dict = {}
 DISTRIBUTOR_CONF: dict = {}
-RS_REST_CONF: dict = {}
+PY_REST_CONF: dict = {}
 
 for toml_file in [CONFIG_PATH]:
     with open(toml_file, "r") as file_reader:
@@ -25,5 +25,10 @@ for toml_file in [CONFIG_PATH]:
 
 if os.getenv("CONTAINERIZED"):
     DISTRIBUTOR_CONF = CONFIG["distributor"]["containerized"]
+    PY_REST_CONF = CONFIG["rest"]["py"]["containerized"]
+elif os.getenv("PRODUCTION"):
+    DISTRIBUTOR_CONF = CONFIG["distributor"]["dev"]
+    PY_REST_CONF = CONFIG["rest"]["py"]["prod"]
 else:
     DISTRIBUTOR_CONF = CONFIG["distributor"]["dev"]
+    PY_REST_CONF = CONFIG["rest"]["py"]["dev"]

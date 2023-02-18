@@ -13,4 +13,8 @@ services:
       dockerfile: backend/rs_rest/Dockerfile
     image: mutestock/sunburst-rs-rest:latest
     
-
+  py_rest:
+    build: 
+      context: "."
+      dockerfile: backend/py_rest/Dockerfile
+    image: mutestock/sunburst-py-rest:latest
