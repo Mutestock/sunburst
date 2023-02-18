@@ -28,11 +28,9 @@ if os.getenv("CONTAINERIZED"):
     DB_CONF = CONFIG["database"]["containerized"]
     DISTRIBUTOR_CONF = CONFIG["distributor"]["containerized"]
     RS_REST_CONF = CONFIG["rest"]["rs"]["containerized"]
-    PY_REST_CONF  = CONFIG["rest"]["py"]["containerized"]
+    PY_REST_CONF = CONFIG["rest"]["py"]["containerized"]
 else:
     DB_CONF = CONFIG["database"]["local"]
     DISTRIBUTOR_CONF = CONFIG["distributor"]["dev"]
     RS_REST_CONF = CONFIG["rest"]["rs"]["dev"]
-    PY_REST_CONF  = CONFIG["rest"]["py"]["dev"]
-    
-    
+    PY_REST_CONF = CONFIG["rest"]["py"]["dev"]

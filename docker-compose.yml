@@ -44,7 +44,7 @@ services:
       - app-network
 
   py_rest:
-    cotnainer_name: "sunburst-py-rest"
+    container_name: "sunburst-py-rest"
     image: mutestock/sunburst-py-rest:latest
     environment:
       - CONTAINERIZED=1
