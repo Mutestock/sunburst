@@ -10,7 +10,13 @@ packages = [{include = "py_rest"}]
 python = "^3.10"
 fastapi = "^0.89.1"
 rtoml = "^0.9.0"
+uvicorn = "^0.20.0"
+proto-implementations = { path ="../../commons/py/proto_implementations/dist/proto_implementations-0.1.4.tar.gz" }
 
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
 
 [build-system]
 requires = ["poetry-core"]
