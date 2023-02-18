@@ -25,10 +25,13 @@ for toml_file in [CONFIG_PATH]:
 
 if os.getenv("CONTAINERIZED"):
     DISTRIBUTOR_CONF = CONFIG["distributor"]["containerized"]
-    PY_REST_CONF = CONFIG["rest"]["py"]["containerized"]
+    PY_REST_CONF = CONFIG["rest"]["py"]["prod"]
+    print("Py rest settings = Containerized")
 elif os.getenv("PRODUCTION"):
     DISTRIBUTOR_CONF = CONFIG["distributor"]["dev"]
     PY_REST_CONF = CONFIG["rest"]["py"]["prod"]
+    print("Py rest settings = Production")
 else:
     DISTRIBUTOR_CONF = CONFIG["distributor"]["dev"]
     PY_REST_CONF = CONFIG["rest"]["py"]["dev"]
+    print("Py rest settings = Dev")
