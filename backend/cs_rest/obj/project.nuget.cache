@@ -1,9 +1,24 @@
 {
   "version": 2,
-  "dgSpecHash": "A6O8VHpLqDtO8NBTJQbnxH4GikrTGZV4eAPa0uIGn1VTUjzGwUGwx/U7hbbDOdEAtFME+vpHSCjX7PVrznYhjQ==",
+  "dgSpecHash": "e2JyeDyAC3V6PIpdVuTeJFzg7ryEi28dpklGrS0NAir7XgNrre7qEg2kYvT1BkXovf1ZvMe/bMwej/fPPXnEXg==",
   "success": true,
   "projectFilePath": "/home/apathy/projects/sunburst/backend/cs_rest/cs_rest.csproj",
   "expectedPackageFiles": [
+    "/home/apathy/.nuget/packages/google.protobuf/3.22.0/google.protobuf.3.22.0.nupkg.sha512",
+    "/home/apathy/.nuget/packages/grpc.core.api/2.51.0/grpc.core.api.2.51.0.nupkg.sha512",
+    "/home/apathy/.nuget/packages/grpc.net.client/2.51.0/grpc.net.client.2.51.0.nupkg.sha512",
+    "/home/apathy/.nuget/packages/grpc.net.common/2.51.0/grpc.net.common.2.51.0.nupkg.sha512",
+    "/home/apathy/.nuget/packages/grpc.tools/2.51.0/grpc.tools.2.51.0.nupkg.sha512",
+    "/home/apathy/.nuget/packages/microsoft.aspnetcore.openapi/7.0.2/microsoft.aspnetcore.openapi.7.0.2.nupkg.sha512",
+    "/home/apathy/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/home/apathy/.nuget/packages/microsoft.extensions.logging.abstractions/3.0.3/microsoft.extensions.logging.abstractions.3.0.3.nupkg.sha512",
+    "/home/apathy/.nuget/packages/microsoft.openapi/1.4.3/microsoft.openapi.1.4.3.nupkg.sha512",
+    "/home/apathy/.nuget/packages/swashbuckle.aspnetcore/6.4.0/swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "/home/apathy/.nuget/packages/swashbuckle.aspnetcore.swagger/6.4.0/swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "/home/apathy/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.4.0/swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "/home/apathy/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.4.0/swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512",
+    "/home/apathy/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
+    "/home/apathy/.nuget/packages/tomlyn/0.16.2/tomlyn.0.16.2.nupkg.sha512",
     "/home/apathy/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.2/microsoft.aspnetcore.app.ref.7.0.2.nupkg.sha512"
   ],
   "logs": []

@@ -37,6 +37,34 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            },
+            "google.protobuf": {
+              "target": "Package",
+              "version": "[3.22.0, )"
+            },
+            "grpc.net.client": {
+              "target": "Package",
+              "version": "[2.51.0, )"
+            },
+            "grpc.tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.51.0, )"
+            },
+            "tomlyn": {
+              "target": "Package",
+              "version": "[0.16.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

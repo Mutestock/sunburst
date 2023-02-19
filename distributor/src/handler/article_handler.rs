@@ -137,7 +137,7 @@ pub async fn handle_read_article_count_by_search_site(
     let mut red_conn = redis_connection::connect_redis(&REDIS_CONN_STRING)
         .await
         .expect("Could not establish redis connection");
-
+    
     let cache_key = formatted_cnt_search_site_cache_key(&request.search_term, &request.site);
     let current_cache_contents: Option<String> = red_conn
         .get(&cache_key)

@@ -1,36 +1,42 @@
-{
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:32603",
-      "sslPort": 44378
+      "applicationUrl": "http://localhost:10306",
+      "sslPort": 44337
     }
   },
   "profiles": {
-    "http": {
+    "dev": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5144",
+      "launchUrl": "swagger",
+      "applicationUrl": "http://localhost:22552",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "https": {
+    "containerized": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7041;http://localhost:5144",
+      "launchUrl": "swagger",
+      "applicationUrl": "http://0.0.0.0:22552",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "CONTAINERIZED"
       }
     },
-    "IIS Express": {
-      "commandName": "IISExpress",
+    "production": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
       "launchBrowser": true,
+      "launchUrl": "swagger",
+      "applicationUrl": "http://0.0.0.0:22552",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "PRODUCTION"
       }
     }
   }
