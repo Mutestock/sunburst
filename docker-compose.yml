@@ -53,6 +53,16 @@ services:
     networks:
       - app-network
 
+  cs_rest:
+    container_name: "sunburst-cs-rest"
+    image: mutestock/sunburst-cs-rest:latest
+    environment:
+      - CONTAINERIZED=1
+    ports:
+      - 22552:22552
+    networks:
+      - app-network
+
 volumes:
   data:
     driver: local

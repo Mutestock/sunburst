@@ -107,6 +107,8 @@ pub struct CacheContainerized {
 #[derive(Serialize, Deserialize)]
 pub struct Rest {
     pub rs: RsRest,
+    pub py: PyRest,
+    pub cs: CsRest,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -131,6 +133,58 @@ pub struct RsRestProd {
 
 #[derive(Serialize, Deserialize)]
 pub struct RsRestContainerized {
+    pub host: String,
+    pub port: u16,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct PyRest {
+    pub container_name: String,
+    pub dev: PyRestDev,
+    pub prod: PyRestProd,
+    pub containerized: PyRestContainerized,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct PyRestDev {
+    pub host: String,
+    pub port: u16,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct PyRestProd {
+    pub host: String,
+    pub port: u16,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct PyRestContainerized {
+    pub host: String,
+    pub port: u16,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct CsRest {
+    pub container_name: String,
+    pub dev: CsRestDev,
+    pub prod: CsRestProd,
+    pub containerized: CsRestContainerized,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct CsRestDev {
+    pub host: String,
+    pub port: u16,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct CsRestProd {
+    pub host: String,
+    pub port: u16,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct CsRestContainerized {
     pub host: String,
     pub port: u16,
 }
