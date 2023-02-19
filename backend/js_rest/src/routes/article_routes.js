@@ -1,9 +1,24 @@
-var express = require('express');
-var router = express.Router();
+import { Router } from "express";
 
-/* GET users listing. */
-router.get('/', function (req, res, next) {
-    res.send('respond with a resource');
+let router = Router();
+
+router.get('/article', async function (req, res, next) {
+    res.send('Ok');
 });
 
-module.exports = router;
+router.get("/article/site=:site", async function (req, res, next) {
+    res.send(`Site was ${req.params.site}`)
+});
+
+router.get("/article/search-term=:searchTerm", async function (req, res, next) {
+    res.send(`Search term was ${req.params.searchTerm}`)
+});
+
+router.get("/article/count/site=:site/search=:searchTerm", async function (req, res, next) {
+    res.send(`Site was ${req.params.site} and search term was ${req.params.searchTerm}`)
+});
+
+
+export {
+    router
+}
