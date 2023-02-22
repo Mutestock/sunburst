@@ -63,6 +63,16 @@ services:
     networks:
       - app-network
 
+  js_rest:
+    container_name: "sunburst-js-rest"
+    image: mutestock/sunburst-js-rest:latest
+    environment:
+      - CONTAINERIZED=1
+    ports:
+      - 22553:22553
+    networks:
+      - app-network
+
 volumes:
   data:
     driver: local

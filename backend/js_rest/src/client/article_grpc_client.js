@@ -1,5 +1,6 @@
 import * as protoLoader from "@grpc/proto-loader";
 import * as grpc from "@grpc/grpc-js";
+import { DISTRIB_CONFIG } from "../utils/config.js";
 
 const PROTO_PATH = "../../proto/article.proto";
 const PACKAGE_DEFINITION = protoLoader.loadSync(
@@ -14,7 +15,7 @@ const PACKAGE_DEFINITION = protoLoader.loadSync(
 );
 const PROTO_DESCRIPTOR = grpc.loadPackageDefinition(PACKAGE_DEFINITION);
 const articleService = PROTO_DESCRIPTOR.article;
-let client = new articleService.ArticleService("localhost:20488", grpc.credentials.createInsecure());
+let client = new articleService.ArticleService(`${DISTRIB_CONFIG.host}:${DISTRIB_CONFIG.port}`, grpc.credentials.createInsecure());
 
 async function readArticles() {
     return new Promise((resolve, reject) => {

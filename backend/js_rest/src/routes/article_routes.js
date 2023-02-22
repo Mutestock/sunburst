@@ -16,8 +16,6 @@ router.get("/article/search-term=:searchTerm", async function (req, res, _next) 
 });
 
 router.get("/article/count/site=:site/search=:searchTerm", async function (req, res, _next) {
-    console.log(req.params.site);
-    console.log(req.params.searchTerm);
     res.send(await readArticleCountBySearchSite(req.params.site, req.params.searchTerm))
 });
 

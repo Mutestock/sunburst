@@ -24,3 +24,11 @@ services:
       context: "."
       dockerfile: backend/cs_rest/Dockerfile
     image: mutestock/sunburst-cs-rest:latest
+
+  js_rest:
+    build:
+      context: "."
+      dockerfile: backend/js_rest/Dockerfile
+    image: mutestock/sunburst-js-rest:latest
+
+    

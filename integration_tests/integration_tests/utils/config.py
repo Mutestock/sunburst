@@ -17,6 +17,7 @@ DISTRIBUTOR_CONF: dict = {}
 RS_REST_CONF: dict = {}
 PY_REST_CONF: dict = {}
 CS_REST_CONF: dict = {}
+JS_REST_CONF: dict = {}
 
 for toml_file in [CONFIG_PATH]:
     with open(toml_file, "r") as file_reader:
@@ -31,9 +32,11 @@ if os.getenv("CONTAINERIZED"):
     RS_REST_CONF = CONFIG["rest"]["rs"]["containerized"]
     PY_REST_CONF = CONFIG["rest"]["py"]["containerized"]
     CS_REST_CONF = CONFIG["rest"]["cs"]["containerized"]
+    JS_REST_CONF = CONFIG["rest"]["js"]["containerized"]
 else:
     DB_CONF = CONFIG["database"]["local"]
     DISTRIBUTOR_CONF = CONFIG["distributor"]["dev"]
     RS_REST_CONF = CONFIG["rest"]["rs"]["dev"]
     PY_REST_CONF = CONFIG["rest"]["py"]["dev"]
     CS_REST_CONF = CONFIG["rest"]["cs"]["dev"]
+    JS_REST_CONF = CONFIG["rest"]["js"]["dev"]
