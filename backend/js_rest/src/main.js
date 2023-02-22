@@ -1,5 +1,6 @@
 import { router as basic_router } from "./routes/basic_routes.js";
 import { router as article_router } from "./routes/article_routes.js";
+
 import { JS_REST_CONFIG } from "./utils/config.js";
 import express from "express";
 
@@ -16,5 +17,4 @@ app.listen(port, host, function (err) {
     }
     console.log(`Javascript Express listening on ${host}:${port}`);
 })
-
 
