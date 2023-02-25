@@ -116,3 +116,18 @@ port = 22553
 [rest.js.containerized]
 host = "sunburst-js-rest"
 port = 22553
+
+[rest.deno]
+container_name = "sunburst-deno-rest"
+
+[rest.deno.dev]
+host = "127.0.0.1"
+port = 22554
+
+[rest.deno.prod]
+host = "0.0.0.0"
+port = 22554
+
+[rest.deno.containerized]
+host = "sunburst-deno-rest"
+port = 22554
