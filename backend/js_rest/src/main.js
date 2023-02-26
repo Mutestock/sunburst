@@ -3,8 +3,13 @@ import { router as article_router } from "./routes/article_routes.js";
 
 import { DISTRIB_CONFIG, JS_REST_CONFIG } from "./utils/config.js";
 import express from "express";
+import cors from "cors";
 
 let app = express();
+
+
+app.use(cors())
+
 const port = JS_REST_CONFIG.port;
 const host = JS_REST_CONFIG.host;
 
