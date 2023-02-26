@@ -22,7 +22,7 @@ password = "some_pass"
 [cache]
 container_name = "sunburst-redis-cache"
 cached_common_article_search_terms = ["Ukraine", "Russia", "war"]
-cached_sites = ["TV2"]
+cached_sites = ["TV2", "DR"]
 cache_common_articles_refresh_rate_seconds = 120
 
 [cache.local]
@@ -42,6 +42,10 @@ user_agent = "sunburst/0.1.0 ($osinfo)"
 [scraper.profiles.tv2]
 request_frequency_seconds = 1_800
 url = "https://tv2.dk/"
+
+[scraper.profiles.dr]
+request_frequency_seconds = 1_800
+url = "https://dr.dk/"
 
 [distributor]
 [distributor.dev]

@@ -46,12 +46,18 @@ pub struct Scraper {
 #[derive(Serialize, Deserialize)]
 pub struct Profiles {
     pub tv2: Tv2,
+    pub dr: Dr,
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct Tv2 {
     pub request_frequency_seconds: u64,
+    pub url: String,
+}
 
+#[derive(Serialize, Deserialize)]
+pub struct Dr {
+    pub request_frequency_seconds: u64,
     pub url: String,
 }
 

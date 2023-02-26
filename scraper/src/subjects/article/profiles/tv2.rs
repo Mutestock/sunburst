@@ -1,9 +1,13 @@
+use std::time::Duration;
+
 use chrono::Local;
 use sunburst_models::article::Article;
 
 use crate::{
-    scrape_tools::ExtractionHelper,
+    handlers::article_handler::article_insert_many,
+    scrape_tools::{make_request, ExtractionHelper},
     subjects::article::article_profile::{ArticleProfile, CountryCodes},
+    utils::config::CONFIG,
 };
 
 pub struct Tv2Scrape;
@@ -60,5 +64,34 @@ impl ArticleProfile for Tv2Scrape {
 
     fn get_scrape_date() -> chrono::NaiveDateTime {
         Local::now().naive_local()
+    }
+}
+
+impl Tv2Scrape {
+    pub async fn run_timed_sequence_loop() {
+        tokio::task::spawn(async {
+            loop {
+                let content = make_request(&CONFIG.scraper.profiles.tv2.url)
+                    .await
+                    .expect("Could not create request against TV2")
+                    .text()
+                    .await
+                    .expect("Could not extract the text from the TV2 request");
+                println!(
+                    "{}: Request sent against: {}",
+                    Local::now().to_string(),
+                    &CONFIG.scraper.profiles.tv2.url
+                );
+                let extracted_articles = Tv2Scrape::run_sequence(content);
+                article_insert_many(&extracted_articles)
+                    .await
+                    .expect("Could not insert many articles after TV2 scrape");
+
+                tokio::time::sleep(Duration::from_secs(
+                    CONFIG.scraper.profiles.tv2.request_frequency_seconds,
+                ))
+                .await;
+            }
+        });
     }
 }
