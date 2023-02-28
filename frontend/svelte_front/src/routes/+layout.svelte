@@ -1,9 +1,9 @@
 <script>
 	import Header from './Header.svelte';
-	import './styles.css';
+	import './styles.scss';
 </script>
 
-<div class="app">
+<div id="app" class="content">
 	<Header />
 
 	<main>

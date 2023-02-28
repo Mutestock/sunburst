@@ -1,0 +1,41 @@
+@import '@fontsource/fira-mono';
+
+$theme-map: null;
+
+$themes: (
+    darkTheme: ('text-color': white,
+        'bg-color': darkgray),
+    lightTheme: ('text-color': black,
+        'bg-color': white)
+);
+
+@mixin theme() {
+
+    @each $theme,
+    $map in $themes {
+        $theme-map: $map !global;
+
+        .#{theme} & {
+            @content;
+        }
+    }
+
+    $theme-map: null !global;
+}
+
+@function theme-get($key) {
+    @return map-get($theme-map, $key);
+}
+
+.content {
+    padding: 32px;
+    transition: 500ms;
+    font-size: 18px;
+    background-color: #414141;
+    color: lightgray;
+
+    @include theme() {
+        color: theme-get('text-color');
+        background-color: theme-get('bg-color');
+    }
+}

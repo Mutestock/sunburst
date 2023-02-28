@@ -56,4 +56,11 @@
 	}
 </script>
 
-<div id="pie-chart" />
+<div id="pie-chart" class="pie-chart-container"/>
+
+
+<style lang=scss>
+	.pie-chart-container{
+		transition: 100ms;
+	}
+</style>
