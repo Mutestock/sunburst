@@ -24,6 +24,8 @@ container_name = "sunburst-redis-cache"
 cached_common_article_search_terms = ["Ukraine", "Russia", "war"]
 cached_sites = ["TV2", "DR"]
 cache_common_articles_refresh_rate_seconds = 120
+cache_key_lifetime_seconds = 3600
+
 
 [cache.local]
 host = "localhost"
@@ -46,6 +48,10 @@ url = "https://tv2.dk/"
 [scraper.profiles.dr]
 request_frequency_seconds = 1_800
 url = "https://dr.dk/"
+
+[scraper.profiles.forbes_america]
+request_frequency_seconds = 600
+url = "https://www.forbes.com/"
 
 [distributor]
 [distributor.dev]

@@ -16,7 +16,7 @@ use crate::{routes::article_routes::ArticleRouter, utils::config::CONFIG};
 
 #[tokio::main]
 async fn main() -> Result<(), tonic::transport::Error> {
-    caching::start_sequence::start_sequence().await;
+    caching::schedules::cache_common_queries_sequence().await;
     let host: &String;
     let port: &u16;
 

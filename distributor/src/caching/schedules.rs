@@ -8,7 +8,7 @@ use crate::utils::config::CONFIG;
 
 use super::caching_tools::cache_something;
 
-pub async fn start_sequence() {
+pub async fn cache_common_queries_sequence() {
     tokio::task::spawn(async {
         loop {
             let articles = read_articles_filter(None)

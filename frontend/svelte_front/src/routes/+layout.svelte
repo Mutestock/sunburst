@@ -3,11 +3,15 @@
 	import './styles.scss';
 </script>
 
-<div id="app" class="content">
-	<Header />
+<div id="app" class="darkTheme">
+	<div class="content">
 
-	<main>
-		<slot />
-	</main>
+		<Header />
 
+		<main>
+			<slot />
+		</main>
+	
+	</div>
 </div>
+

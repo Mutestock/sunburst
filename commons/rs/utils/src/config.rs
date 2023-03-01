@@ -47,6 +47,7 @@ pub struct Scraper {
 pub struct Profiles {
     pub tv2: Tv2,
     pub dr: Dr,
+    pub forbes_america: ForbesAmerica,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -57,6 +58,12 @@ pub struct Tv2 {
 
 #[derive(Serialize, Deserialize)]
 pub struct Dr {
+    pub request_frequency_seconds: u64,
+    pub url: String,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct ForbesAmerica {
     pub request_frequency_seconds: u64,
     pub url: String,
 }
@@ -91,6 +98,7 @@ pub struct Cache {
     pub container_name: String,
     pub cached_common_article_search_terms: Vec<String>,
     pub cache_common_articles_refresh_rate_seconds: u64,
+    pub cache_key_lifetime_seconds: u64,
     pub cached_sites: Vec<String>,
     pub local: CacheLocal,
     pub containerized: CacheContainerized,

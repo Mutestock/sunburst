@@ -2,8 +2,6 @@ use std::env::consts;
 
 use crate::utils::config::CONFIG;
 
-
-
 pub trait ExtractionHelper {
     fn before(self, search_term: &str) -> String;
     fn after(self, search_term: &str) -> String;
@@ -27,7 +25,10 @@ impl ExtractionHelper for String {
 pub fn construct_user_agent() -> String {
     let user_agent = &CONFIG.scraper.user_agent;
     let info = os_info::get();
-    user_agent.replace("$osinfo", &format!("{}/{}/{}", consts::OS, info.os_type(), info.version()))
+    user_agent.replace(
+        "$osinfo",
+        &format!("{}/{}/{}", consts::OS, info.os_type(), info.version()),
+    )
 }
 
 pub async fn make_request(url_to_scrape: &str) -> Result<reqwest::Response, reqwest::Error> {
