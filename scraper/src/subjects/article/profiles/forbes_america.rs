@@ -3,7 +3,7 @@ use sunburst_models::article::Article;
 
 use crate::{
     handlers::article_handler::article_insert_many,
-    scrape_tools::{make_request, ExtractionHelper},
+    scrape_tools::{make_request, write_response, ExtractionHelper},
     subjects::article::article_profile::{ArticleProfile, CountryCodes},
     utils::config::CONFIG,
 };
@@ -13,11 +13,19 @@ pub struct ForbesAmericaScrape;
 impl ArticleProfile for ForbesAmericaScrape {
     fn run_sequence(content: String) -> Vec<sunburst_models::article::Article> {
         let mut articles = vec![];
-        let desired_content = &content.after("<main class").before("</main>");
+        let desired_content = &content
+            .after("<body>")
+            .after("<main class")
+            .before("</main>");
+
+        write_response(&desired_content, "forbes_america_desired_content.html");
+
         let happening_now_carousel_content = desired_content
             .to_owned()
+            .after("<div class=\"happening-now\">")
             .after("<fbs-carousel")
             .before("</fbs-carousel>");
+
         let popular_tab_content = desired_content
             .to_owned()
             .after("<ul class=\"data-viz__list data-viz__list--international\">")
@@ -49,7 +57,7 @@ impl ArticleProfile for ForbesAmericaScrape {
         "Forbes America".to_owned()
     }
 
-    fn get_language() -> crate::subjects::article::article_profile::CountryCodes {
+    fn get_country_code() -> crate::subjects::article::article_profile::CountryCodes {
         CountryCodes::UnitedStates
     }
 
@@ -71,6 +79,7 @@ impl ForbesAmericaScrape {
             Local::now().to_string(),
             &CONFIG.scraper.profiles.forbes_america.url
         );
+        write_response(&content, "forbes_america_test_out.html");
         let extracted_articles = ForbesAmericaScrape::run_sequence(content);
         article_insert_many(&extracted_articles)
             .await
@@ -90,7 +99,7 @@ impl ForbesAmericaScrape {
                 name: name,
                 site: ForbesAmericaScrape::get_site(),
                 url: url,
-                language: ForbesAmericaScrape::get_language().to_string(),
+                country_code: ForbesAmericaScrape::get_country_code().to_string(),
                 scrape_date: ForbesAmericaScrape::get_scrape_date(),
                 submission_date,
                 tags_and_categories: vec![],
@@ -115,7 +124,7 @@ impl ForbesAmericaScrape {
                 name,
                 site: ForbesAmericaScrape::get_site(),
                 url,
-                language: ForbesAmericaScrape::get_language().to_string(),
+                country_code: ForbesAmericaScrape::get_country_code().to_string(),
                 scrape_date: ForbesAmericaScrape::get_scrape_date(),
                 submission_date: submission_date,
                 tags_and_categories: vec![],
@@ -144,7 +153,7 @@ impl ForbesAmericaScrape {
                 name,
                 site: ForbesAmericaScrape::get_site(),
                 url,
-                language: ForbesAmericaScrape::get_language().to_string(),
+                country_code: ForbesAmericaScrape::get_country_code().to_string(),
                 scrape_date: ForbesAmericaScrape::get_scrape_date(),
                 submission_date,
                 tags_and_categories: vec![],
@@ -159,14 +168,14 @@ impl ForbesAmericaScrape {
         let slashes_content = &intermediate_url_extraction_content
             .split("/")
             .collect::<Vec<&str>>()[1..4];
-        if (slashes_content.len() != 3) {
+        if slashes_content.len() != 3 {
             return None;
         }
         let all_entries_are_numbers = slashes_content.iter().all(|x| match x.parse::<usize>() {
             Ok(_) => true,
             Err(_) => false,
         });
-        if (!all_entries_are_numbers) {
+        if !all_entries_are_numbers {
             return None;
         }
         let year = slashes_content.get(0).unwrap();

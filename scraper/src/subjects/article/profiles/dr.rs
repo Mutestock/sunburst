@@ -36,7 +36,7 @@ impl ArticleProfile for DrScrape {
                     }
                     url
                 },
-                &DrScrape::get_language().to_string(),
+                &DrScrape::get_country_code().to_string(),
                 &DrScrape::get_scrape_date(),
                 None,
                 labels,
@@ -49,7 +49,7 @@ impl ArticleProfile for DrScrape {
         "DR".to_owned()
     }
 
-    fn get_language() -> crate::subjects::article::article_profile::CountryCodes {
+    fn get_country_code() -> crate::subjects::article::article_profile::CountryCodes {
         CountryCodes::Denmark
     }
 

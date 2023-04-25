@@ -51,13 +51,13 @@ export class ArticleCount{
 export class RestServiceOptions{
     name: string;
     url: string;
-    language: string;
+    country_code: string;
     casing: Casing
 
-    constructor(name: string, url: string, language: string, casing: Casing){
+    constructor(name: string, url: string, country_code: string, casing: Casing){
         this.name = name;
         this.url = url;
-        this.language = language;
+        this.country_code = country_code;
         this.casing = casing;
     }
 }

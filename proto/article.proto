@@ -15,7 +15,7 @@ message ArticleMessage {
   string name = 1;
   string site = 2;
   string url = 3;
-  string language = 4;
+  string country_code = 4;
   string scrape_date = 5;
   optional string submission_date = 6;
   repeated string tags_and_categories = 7;

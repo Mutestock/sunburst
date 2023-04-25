@@ -6,7 +6,7 @@ use super::profiles::{dr::DrScrape, forbes_america::ForbesAmericaScrape, tv2::Tv
 pub trait ArticleProfile {
     fn run_sequence(content: String) -> Vec<Article>;
     fn get_site() -> String;
-    fn get_language() -> CountryCodes;
+    fn get_country_code() -> CountryCodes;
     fn get_scrape_date() -> NaiveDateTime;
 }
 

@@ -1,4 +1,4 @@
-use std::env::consts;
+use std::{env::consts, fs::File, io::Write, path::Path};
 
 use crate::utils::config::CONFIG;
 
@@ -36,4 +36,12 @@ pub async fn make_request(url_to_scrape: &str) -> Result<reqwest::Response, reqw
         .user_agent(construct_user_agent())
         .build()?;
     client.get(url_to_scrape).send().await
+}
+
+pub fn write_response(content: &str, out_name: &str) {
+    let file_path = Path::new(out_name);
+
+    let mut file = File::create(&file_path).expect("Could not write response file");
+    file.write_all(content.as_bytes())
+        .expect("Could not write response file contents");
 }

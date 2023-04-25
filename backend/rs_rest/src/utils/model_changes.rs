@@ -14,7 +14,7 @@ impl ArticleGrpcBind for ArticleMessage {
             name: self.name,
             site: self.site,
             url: self.url,
-            language: self.language,
+            country_code: self.country_code,
             scrape_date: NaiveDateTime::parse_from_str(&self.scrape_date, "%Y-%m-%d %H:%M:%S%.f")
                 .expect("Could not parse scrape date to naivedatetime"),
             submission_date: match self.submission_date {

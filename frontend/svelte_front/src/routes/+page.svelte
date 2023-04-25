@@ -88,7 +88,7 @@
 			</p>
 			<p>
 				That's the point. REST is an architecture style. It has basic constraints which all of the
-				services adhere to regardless of language. This is how it's supposed to work.
+				services adhere to regardless of country_code. This is how it's supposed to work.
 			</p>
 
 			<PieChart

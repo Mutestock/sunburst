@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rarticle.proto\x12\x07\x61rticle\"\xaf\x01\n\x0e\x41rticleMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04site\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x10\n\x08language\x18\x04 \x01(\t\x12\x13\n\x0bscrape_date\x18\x05 \x01(\t\x12\x1c\n\x0fsubmission_date\x18\x06 \x01(\tH\x00\x88\x01\x01\x12\x1b\n\x13tags_and_categories\x18\x07 \x03(\tB\x12\n\x10_submission_date\"\x18\n\x16ReadArticleListRequest\"9\n\"ReadArticleListBySearchtermRequest\x12\x13\n\x0bsearch_term\x18\x01 \x01(\t\",\n\x1cReadArticleListBySiteRequest\x12\x0c\n\x04site\x18\x01 \x01(\t\"H\n#ReadArticleCountBySearchSiteRequest\x12\x0c\n\x04site\x18\x01 \x01(\t\x12\x13\n\x0bsearch_term\x18\x02 \x01(\t\"Q\n\x17ReadArticleListResponse\x12)\n\x08\x61rticles\x18\x01 \x03(\x0b\x32\x17.article.ArticleMessage\x12\x0b\n\x03msg\x18\x02 \x01(\t\"]\n#ReadArticleListBySearchtermResponse\x12)\n\x08\x61rticles\x18\x01 \x03(\x0b\x32\x17.article.ArticleMessage\x12\x0b\n\x03msg\x18\x02 \x01(\t\"W\n\x1dReadArticleListBySiteResponse\x12)\n\x08\x61rticles\x18\x01 \x03(\x0b\x32\x17.article.ArticleMessage\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x7f\n$ReadArticleCountBySearchSiteResponse\x12\r\n\x05total\x18\x01 \x01(\x03\x12!\n\x19\x63nt_contained_search_term\x18\x02 \x01(\x03\x12%\n\x1d\x63nt_not_contained_search_term\x18\x03 \x01(\x03\x32\xcd\x03\n\x0e\x41rticleService\x12V\n\x0fReadArticleList\x12\x1f.article.ReadArticleListRequest\x1a .article.ReadArticleListResponse\"\x00\x12z\n\x1bReadArticleListBySearchterm\x12+.article.ReadArticleListBySearchtermRequest\x1a,.article.ReadArticleListBySearchtermResponse\"\x00\x12h\n\x15ReadArticleListBySite\x12%.article.ReadArticleListBySiteRequest\x1a&.article.ReadArticleListBySiteResponse\"\x00\x12}\n\x1cReadArticleCountBySearchSite\x12,.article.ReadArticleCountBySearchSiteRequest\x1a-.article.ReadArticleCountBySearchSiteResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\rarticle.proto\x12\x07\x61rticle\"\xb3\x01\n\x0e\x41rticleMessage\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04site\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x14\n\x0c\x63ountry_code\x18\x04 \x01(\t\x12\x13\n\x0bscrape_date\x18\x05 \x01(\t\x12\x1c\n\x0fsubmission_date\x18\x06 \x01(\tH\x00\x88\x01\x01\x12\x1b\n\x13tags_and_categories\x18\x07 \x03(\tB\x12\n\x10_submission_date\"\x18\n\x16ReadArticleListRequest\"9\n\"ReadArticleListBySearchtermRequest\x12\x13\n\x0bsearch_term\x18\x01 \x01(\t\",\n\x1cReadArticleListBySiteRequest\x12\x0c\n\x04site\x18\x01 \x01(\t\"H\n#ReadArticleCountBySearchSiteRequest\x12\x0c\n\x04site\x18\x01 \x01(\t\x12\x13\n\x0bsearch_term\x18\x02 \x01(\t\"Q\n\x17ReadArticleListResponse\x12)\n\x08\x61rticles\x18\x01 \x03(\x0b\x32\x17.article.ArticleMessage\x12\x0b\n\x03msg\x18\x02 \x01(\t\"]\n#ReadArticleListBySearchtermResponse\x12)\n\x08\x61rticles\x18\x01 \x03(\x0b\x32\x17.article.ArticleMessage\x12\x0b\n\x03msg\x18\x02 \x01(\t\"W\n\x1dReadArticleListBySiteResponse\x12)\n\x08\x61rticles\x18\x01 \x03(\x0b\x32\x17.article.ArticleMessage\x12\x0b\n\x03msg\x18\x02 \x01(\t\"\x7f\n$ReadArticleCountBySearchSiteResponse\x12\r\n\x05total\x18\x01 \x01(\x03\x12!\n\x19\x63nt_contained_search_term\x18\x02 \x01(\x03\x12%\n\x1d\x63nt_not_contained_search_term\x18\x03 \x01(\x03\x32\xcd\x03\n\x0e\x41rticleService\x12V\n\x0fReadArticleList\x12\x1f.article.ReadArticleListRequest\x1a .article.ReadArticleListResponse\"\x00\x12z\n\x1bReadArticleListBySearchterm\x12+.article.ReadArticleListBySearchtermRequest\x1a,.article.ReadArticleListBySearchtermResponse\"\x00\x12h\n\x15ReadArticleListBySite\x12%.article.ReadArticleListBySiteRequest\x1a&.article.ReadArticleListBySiteResponse\"\x00\x12}\n\x1cReadArticleCountBySearchSite\x12,.article.ReadArticleCountBySearchSiteRequest\x1a-.article.ReadArticleCountBySearchSiteResponse\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'article_pb2', globals())
@@ -21,23 +21,23 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _ARTICLEMESSAGE._serialized_start=27
-  _ARTICLEMESSAGE._serialized_end=202
-  _READARTICLELISTREQUEST._serialized_start=204
-  _READARTICLELISTREQUEST._serialized_end=228
-  _READARTICLELISTBYSEARCHTERMREQUEST._serialized_start=230
-  _READARTICLELISTBYSEARCHTERMREQUEST._serialized_end=287
-  _READARTICLELISTBYSITEREQUEST._serialized_start=289
-  _READARTICLELISTBYSITEREQUEST._serialized_end=333
-  _READARTICLECOUNTBYSEARCHSITEREQUEST._serialized_start=335
-  _READARTICLECOUNTBYSEARCHSITEREQUEST._serialized_end=407
-  _READARTICLELISTRESPONSE._serialized_start=409
-  _READARTICLELISTRESPONSE._serialized_end=490
-  _READARTICLELISTBYSEARCHTERMRESPONSE._serialized_start=492
-  _READARTICLELISTBYSEARCHTERMRESPONSE._serialized_end=585
-  _READARTICLELISTBYSITERESPONSE._serialized_start=587
-  _READARTICLELISTBYSITERESPONSE._serialized_end=674
-  _READARTICLECOUNTBYSEARCHSITERESPONSE._serialized_start=676
-  _READARTICLECOUNTBYSEARCHSITERESPONSE._serialized_end=803
-  _ARTICLESERVICE._serialized_start=806
-  _ARTICLESERVICE._serialized_end=1267
+  _ARTICLEMESSAGE._serialized_end=206
+  _READARTICLELISTREQUEST._serialized_start=208
+  _READARTICLELISTREQUEST._serialized_end=232
+  _READARTICLELISTBYSEARCHTERMREQUEST._serialized_start=234
+  _READARTICLELISTBYSEARCHTERMREQUEST._serialized_end=291
+  _READARTICLELISTBYSITEREQUEST._serialized_start=293
+  _READARTICLELISTBYSITEREQUEST._serialized_end=337
+  _READARTICLECOUNTBYSEARCHSITEREQUEST._serialized_start=339
+  _READARTICLECOUNTBYSEARCHSITEREQUEST._serialized_end=411
+  _READARTICLELISTRESPONSE._serialized_start=413
+  _READARTICLELISTRESPONSE._serialized_end=494
+  _READARTICLELISTBYSEARCHTERMRESPONSE._serialized_start=496
+  _READARTICLELISTBYSEARCHTERMRESPONSE._serialized_end=589
+  _READARTICLELISTBYSITERESPONSE._serialized_start=591
+  _READARTICLELISTBYSITERESPONSE._serialized_end=678
+  _READARTICLECOUNTBYSEARCHSITERESPONSE._serialized_start=680
+  _READARTICLECOUNTBYSEARCHSITERESPONSE._serialized_end=807
+  _ARTICLESERVICE._serialized_start=810
+  _ARTICLESERVICE._serialized_end=1271
 # @@protoc_insertion_point(module_scope)

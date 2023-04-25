@@ -8,7 +8,7 @@ class Article:
     name: str
     site: str
     url: str
-    language: str
+    country_code: str
     scrape_date: str
     submission_date: str
     tags_and_categories: list
@@ -18,7 +18,7 @@ class Article:
         name = ""
         site = ""
         url = ""
-        language = ""
+        country_code = ""
         scrape_date = ""
         submission_date = ""
         tags_and_categories = []
@@ -29,8 +29,8 @@ class Article:
             site = str(article_message.site)
         if article_message.url:
             url = str(article_message.url)
-        if article_message.language:
-            language = str(article_message.language)
+        if article_message.country_code:
+            country_code = str(article_message.country_code)
         if article_message.scrape_date:
             scrape_date = str(article_message.scrape_date)
         if article_message.submission_date:
@@ -47,7 +47,7 @@ class Article:
             name,
             site,
             url,
-            language,
+            country_code,
             scrape_date,
             submission_date,
             tags_and_categories,

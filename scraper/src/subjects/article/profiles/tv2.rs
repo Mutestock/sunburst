@@ -45,7 +45,7 @@ impl ArticleProfile for Tv2Scrape {
                 &name,
                 &Tv2Scrape::get_site(),
                 &url,
-                &Tv2Scrape::get_language().to_string(),
+                &Tv2Scrape::get_country_code().to_string(),
                 &Tv2Scrape::get_scrape_date(),
                 None,
                 labels,
@@ -58,7 +58,7 @@ impl ArticleProfile for Tv2Scrape {
         "TV2".to_owned()
     }
 
-    fn get_language() -> CountryCodes {
+    fn get_country_code() -> CountryCodes {
         CountryCodes::Denmark
     }
 

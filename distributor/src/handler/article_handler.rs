@@ -168,7 +168,7 @@ async fn articles_to_article_messages(articles: &[Article]) -> Vec<ArticleMessag
             name: article.name.clone(),
             site: article.site.clone(),
             url: article.url.clone(),
-            language: article.language.clone(),
+            country_code: article.country_code.clone(),
             scrape_date: article.scrape_date.to_string(),
             submission_date: match article.submission_date {
                 Some(v) => Some(v.to_string()),
